@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class NextLvl : MonoBehaviour
 {
     public LayerMask whatIsPlayer;
+    public GameObject levelGenerator;
     public float w;
     public float h;
+    public int count = 0;
     void Update()
     {
         if (Input.GetKeyDown("f"))
@@ -22,43 +24,50 @@ public class NextLvl : MonoBehaviour
         if (Player != null)
         {
             LevelGenerator.LVL++;
-            var objs = GameObject.FindGameObjectsWithTag("wall"); // возвращает МАССИВ!
-            for (int i = 0; i < objs.Length; i++)
-                Destroy(objs[i]);
+            foreach (Transform child in levelGenerator.transform)
+            {
+                count++;
+                Destroy((child as Transform).gameObject);
+            }
+            print(count);
+            //var objs = GameObject.FindGameObjectsWithTag("wall"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs.Length; i++)
+            //    Destroy(objs[i]);
 
-            var objs2 = GameObject.FindGameObjectsWithTag("floor"); // возвращает МАССИВ!
-            for (int i = 0; i < objs2.Length; i++)
-                Destroy(objs2[i]);
+            //var objs2 = GameObject.FindGameObjectsWithTag("floor"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs2.Length; i++)
+            //    Destroy(objs2[i]);
 
-            var objs3 = GameObject.FindGameObjectsWithTag("Portal"); // возвращает МАССИВ!
-            for (int i = 0; i < objs3.Length; i++)
-                Destroy(objs3[i]);
+            //var objs3 = GameObject.FindGameObjectsWithTag("Portal"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs3.Length; i++)
+            //    Destroy(objs3[i]);
 
-            var objs4 = GameObject.FindGameObjectsWithTag("HealthPotionItem"); // возвращает МАССИВ!
-            for (int i = 0; i < objs4.Length; i++)
-                Destroy(objs4[i]);
+            //var objs4 = GameObject.FindGameObjectsWithTag("HealthPotionItem"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs4.Length; i++)
+            //    Destroy(objs4[i]);
 
-            var objs5 = GameObject.FindGameObjectsWithTag("ScrollItem"); // возвращает МАССИВ!
-            for (int i = 0; i < objs5.Length; i++)
-                Destroy(objs5[i]);
+            //var objs5 = GameObject.FindGameObjectsWithTag("ScrollItem"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs5.Length; i++)
+            //    Destroy(objs5[i]);
 
-            var objs6 = GameObject.FindGameObjectsWithTag("SoulItem"); // возвращает МАССИВ!
-            for (int i = 0; i < objs6.Length; i++)
-                Destroy(objs6[i]);
+            //var objs6 = GameObject.FindGameObjectsWithTag("SoulItem"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs6.Length; i++)
+            //    Destroy(objs6[i]);
 
-            objs2 = GameObject.FindGameObjectsWithTag("floor"); // возвращает МАССИВ!
-            for (int i = 0; i < objs2.Length; i++)
-                Destroy(objs2[i]);
-            //убрать
-            objs2 = GameObject.FindGameObjectsWithTag("Enemy"); // возвращает МАССИВ!
-            for (int i = 0; i < objs2.Length; i++)
-                Destroy(objs2[i]);
+            //objs2 = GameObject.FindGameObjectsWithTag("floor"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs2.Length; i++)
+            //    Destroy(objs2[i]);
+            ////убрать
 
-            objs2 = GameObject.FindGameObjectsWithTag("AmuletItem"); // возвращает МАССИВ!
-            for (int i = 0; i < objs2.Length; i++)
-                Destroy(objs2[i]);
 
-            objs2 = GameObject.FindGameObjectsWithTag("Menoreh"); // возвращает МАССИВ!
+            //objs2 = GameObject.FindGameObjectsWithTag("AmuletItem"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs2.Length; i++)
+            //    Destroy(objs2[i]);
+
+            //objs2 = GameObject.FindGameObjectsWithTag("Menoreh"); // возвращает МАССИВ!
+            //for (int i = 0; i < objs2.Length; i++)
+            //    Destroy(objs2[i]);
+            var objs2 = GameObject.FindGameObjectsWithTag("Enemy"); // возвращает МАССИВ!
             for (int i = 0; i < objs2.Length; i++)
                 Destroy(objs2[i]);
             PlayerHP pl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
@@ -67,11 +76,13 @@ public class NextLvl : MonoBehaviour
             p2.LvlDamageUp();
 
 
-            GameObject go = GameObject.FindGameObjectWithTag("levelGenerator");
-            go.GetComponent<LevelGenerator>().Start();
+            //GameObject go = GameObject.FindGameObjectWithTag("levelGenerator");
+            levelGenerator.GetComponent<LevelGenerator>().Start();
 
             if(LevelGenerator.LVL >= 10)
                 SceneManager.LoadScene("OnWinScene");
+
+            Destroy(gameObject);
         }
 
     }

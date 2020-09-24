@@ -12,7 +12,7 @@ public class LevelGenerator : MonoBehaviour
     int roomHeight, roomWidth;
     Vector2 roomSizeWorldUnits;
     float worldUnitsInOneGridCell = 1;
-        
+      
     enum Mobs { mob1, boss1, boss2, boss3 };
     public GameObject portal, mob1, boss1, boss2, boss3;
     private GameObject player;
@@ -324,7 +324,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-                    for (int x = 1; x < roomWidth - 1; x++)
+        for (int x = 1; x < roomWidth - 1; x++)
         {
             for (int y = 1; y < roomHeight - 1; y++)
             {
@@ -645,12 +645,9 @@ public class LevelGenerator : MonoBehaviour
     }
     void Spawn(float x, float y, GameObject toSpawn)
     {
-        //find the position to spawn
-        //Vector2 offset = roomSizeWorldUnits / 2.0f;
-        //Vector2 offset = roomSizeWorldUnits / 2.0f;
         Vector2 spawnPos = new Vector2(x, y) * worldUnitsInOneGridCell;
         //spawn object
-        Instantiate(toSpawn, spawnPos, Quaternion.identity);
+        Instantiate(toSpawn, spawnPos, Quaternion.identity, gameObject.transform);
     }
 
     bool NormalGeneration()
@@ -753,7 +750,8 @@ public class LevelGenerator : MonoBehaviour
         if (MobCountOnLvl == 0)
         {
             GameObject Enemy = GameObject.FindGameObjectWithTag("Enemy");
-            Instantiate(portal, new Vector3(Enemy.transform.position.x, Enemy.transform.position.y + 0.3f, -80), Quaternion.identity);
+            GameObject Portal = Instantiate(portal, new Vector3(Enemy.transform.position.x, Enemy.transform.position.y + 0.3f, -80), Quaternion.identity);
+            Portal.GetComponent<NextLvl>().levelGenerator = gameObject;
         }
     }
 
@@ -773,7 +771,7 @@ public class LevelGenerator : MonoBehaviour
         {
         Collider2D[] menorah = Physics2D.OverlapCircleAll(new Vector2(UwallForMenorah[i, 0], UwallForMenorah[i, 1]), MenorahSpawnRange, whatIsMenorah);
             if (menorah.Length <= 0)
-                Instantiate(menorahU, new Vector3(UwallForMenorah[i, 0], UwallForMenorah[i, 1], -10), Quaternion.identity);
+                Instantiate(menorahU, new Vector3(UwallForMenorah[i, 0], UwallForMenorah[i, 1], -10), Quaternion.identity, gameObject.transform);
         }
 
 
@@ -781,7 +779,7 @@ public class LevelGenerator : MonoBehaviour
         {
             Collider2D[] menorah = Physics2D.OverlapCircleAll(new Vector2(LwallForMenorah[i, 0], LwallForMenorah[i, 1]), MenorahSpawnRange, whatIsMenorah);
             if (menorah.Length <= 0)
-                Instantiate(menorahL, new Vector3(LwallForMenorah[i, 0], LwallForMenorah[i, 1], -10), Quaternion.identity);
+                Instantiate(menorahL, new Vector3(LwallForMenorah[i, 0], LwallForMenorah[i, 1], -10), Quaternion.identity, gameObject.transform);
         }
         
 
@@ -789,7 +787,7 @@ public class LevelGenerator : MonoBehaviour
         {
             Collider2D[] menorah = Physics2D.OverlapCircleAll(new Vector2(RwallForMenorah[i, 0], RwallForMenorah[i, 1]), MenorahSpawnRange, whatIsMenorah);
             if (menorah.Length <= 0)
-                Instantiate(menorahR, new Vector3(RwallForMenorah[i, 0], RwallForMenorah[i, 1], -10), Quaternion.identity);
+                Instantiate(menorahR, new Vector3(RwallForMenorah[i, 0], RwallForMenorah[i, 1], -10), Quaternion.identity, gameObject.transform);
         }
 
 
@@ -797,7 +795,7 @@ public class LevelGenerator : MonoBehaviour
         {
             Collider2D[] menorah = Physics2D.OverlapCircleAll(new Vector2(DwallForMenorah[i, 0], DwallForMenorah[i, 1]), MenorahSpawnRange, whatIsMenorah);
             if (menorah.Length <= 0)
-                Instantiate(menorahD, new Vector3(DwallForMenorah[i, 0], DwallForMenorah[i, 1], -10), Quaternion.identity);
+                Instantiate(menorahD, new Vector3(DwallForMenorah[i, 0], DwallForMenorah[i, 1], -10), Quaternion.identity, gameObject.transform);
         }
 
     }

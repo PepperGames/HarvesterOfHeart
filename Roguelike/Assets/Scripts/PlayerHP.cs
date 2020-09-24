@@ -130,7 +130,7 @@ public class PlayerHP : MonoBehaviour
             print(redVariable);
             if (currentHP <= 0)
             {
-                SceneManager.LoadScene("OnLoseScene");
+               // SceneManager.LoadScene("OnLoseScene");
             }
         }
     }

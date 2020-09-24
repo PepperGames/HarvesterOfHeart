@@ -28,12 +28,10 @@ public class PlayerController : MonoBehaviour
 
     private State state;
 
-public LayerMask rollLayerMask;
+    public LayerMask rollLayerMask;
 
     private PlayerHP playerHP;
 
-
-    public GameObject Center;
     //Используем это для инициализации
     void Start()
     {
