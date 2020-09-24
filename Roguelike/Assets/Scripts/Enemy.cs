@@ -38,8 +38,8 @@ public class Enemy : MonoBehaviour
     public Animator anim;
     //пепел после смерти
     public GameObject deathEffect;
-    public AudioClip[] clips;
-    AudioSource audioSource;
+    public AudioSource[] audioSources;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -69,14 +69,10 @@ public class Enemy : MonoBehaviour
 
         anim = GetComponent<Animator>();
 
-        audioSource = GetComponent<AudioSource>();
-
     }
 
     void Update()
     {
-
-        Player = GameObject.FindGameObjectWithTag("Player");
 
         if (Player == null) return;
         float dis = Vector2.Distance(transform.position, Player.transform.position);
@@ -220,9 +216,8 @@ public class Enemy : MonoBehaviour
             {
                 if (timeBtwAttac <= 0)
                 {
-                    audioSource.clip = clips[0];
-                    print(audioSource.clip);
-                    audioSource.Play();
+                    print(audioSources[0].clip);
+                    audioSources[0].Play();
                     if (Player.transform.position.x - transform.position.x < 0)
                     {
                         anim.SetInteger("state", 4);

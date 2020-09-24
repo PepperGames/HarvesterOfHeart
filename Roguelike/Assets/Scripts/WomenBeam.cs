@@ -10,11 +10,15 @@ public class WomenBeam : MonoBehaviour
     public GameObject attackPos;
     public float attackRange;
     public LayerMask whatIsEnemies;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
         damage = 5 * LevelGenerator.LVL;
+
+        print(audioSource.clip);
+        audioSource.Play();
     }
 
     public void Attack()

@@ -46,27 +46,32 @@ public class LevelGenerator : MonoBehaviour
     public float MenorahSpawnRange;
     public LayerMask whatIsMenorah;
 
-    public AudioClip[] clips;
-    AudioSource audioSource;
+    public AudioSource[] audioSources;
+
     public void Start()
+    {
+
+        RestartLVL();
+        print(audioSources[0].clip);
+        audioSources[0].Play();
+    }
+
+    public void RestartLVL()
     {
 
         Setup();
         CreateFloors();
         CreateWalls();
         SpawnLevel();
-        
+
         normalGenerationCheck = GameObject.FindGameObjectWithTag("levelGenerator").GetComponent<NormalGenerationCheck>();
-        if(!NormalGeneration()){
+        if (!NormalGeneration())
+        {
             Restarter r = new Restarter();
             r.Restart();
         }
         SpawnMob();
         SpawnMenorah();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = clips[0];
-        print(audioSource.clip);
-        audioSource.Play();
     }
     void Setup()
     {

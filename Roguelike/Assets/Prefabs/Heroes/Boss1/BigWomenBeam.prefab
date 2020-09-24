@@ -81,8 +81,7 @@ MonoBehaviour:
   damage: 0
   timeToDestroy: 7
   speed: 2
-  clips:
-  - {fileID: 8300000, guid: d4de607307bf4a64190ba559dbbd41a8, type: 3}
+  audioSource: {fileID: 6116010188914765018}
 --- !u!212 &1015227764953457228
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -189,7 +188,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d4de607307bf4a64190ba559dbbd41a8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

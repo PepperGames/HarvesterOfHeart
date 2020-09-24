@@ -58,8 +58,6 @@ public class Player : MonoBehaviour
     public GameObject Center;
     private Animator CenterAnim;
     private bool isPlayed = false;
-    public AudioClip[] clips;
-    AudioSource audioSource;
 
     //хп
     public float maxHP;//максимальное хп без шмотки
@@ -86,6 +84,9 @@ public class Player : MonoBehaviour
     private float redVariable;
     private bool isPlayedHP = false;
     private bool isPlayedScroll = false;
+
+    public AudioSource[] audioSources;
+
     private void Start()
     {
         //атака
@@ -95,7 +96,6 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         cam = Camera.main;
         CenterAnim = Center.GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
         //движжение
         rb2d = GetComponent<Rigidbody2D>();
         speed = 120f;
@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        DisplayHP();
         //движение
         switch (state)
         {
@@ -321,10 +322,10 @@ public class Player : MonoBehaviour
             CenterAnim.SetInteger("state", 2);
             if (!isPlayed)
             {
-                audioSource.clip = clips[0];
-                print(audioSource.clip);
-                audioSource.Play();
-                isPlayed = true;
+                //audioSource.clip = clips[0];
+                //print(audioSource.clip);
+                //audioSource.Play();
+                //isPlayed = true;
             }
         }
         else
@@ -341,10 +342,10 @@ public class Player : MonoBehaviour
             CenterAnim.SetInteger("state", 3);
             if (!isPlayedScroll)
             {
-                audioSource.clip = clips[1];
-                print(audioSource.clip);
-                audioSource.Play();
-                isPlayedScroll = true;
+                //audioSource.clip = clips[1];
+                //print(audioSource.clip);
+                //audioSource.Play();
+                //isPlayedScroll = true;
             }
         }
         else
@@ -355,10 +356,10 @@ public class Player : MonoBehaviour
         }
         if (!isPlayedHP)
         {
-            audioSource.clip = clips[0];
-            print(audioSource.clip);
-            audioSource.Play();
-            isPlayedHP = true;
+            //audioSource.clip = clips[0];
+            //print(audioSource.clip);
+            //audioSource.Play();
+            //isPlayedHP = true;
         }
     }
     private void OnDrawGizmosSelected()
@@ -466,9 +467,8 @@ public class Player : MonoBehaviour
 
     public void Attack1()
     {
-        audioSource.clip = clips[1];
-        print(audioSource.clip);
-        audioSource.Play();
+        print(audioSources[0].clip);
+        audioSources[0].Play();
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {

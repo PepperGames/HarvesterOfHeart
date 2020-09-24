@@ -29,7 +29,7 @@ public class NextLvl : MonoBehaviour
                 count++;
                 Destroy((child as Transform).gameObject);
             }
-            print(count);
+            //print(count);
             //var objs = GameObject.FindGameObjectsWithTag("wall"); // возвращает МАССИВ!
             //for (int i = 0; i < objs.Length; i++)
             //    Destroy(objs[i]);
@@ -77,7 +77,7 @@ public class NextLvl : MonoBehaviour
 
 
             //GameObject go = GameObject.FindGameObjectWithTag("levelGenerator");
-            levelGenerator.GetComponent<LevelGenerator>().Start();
+            levelGenerator.GetComponent<LevelGenerator>().RestartLVL();
 
             if(LevelGenerator.LVL >= 10)
                 SceneManager.LoadScene("OnWinScene");

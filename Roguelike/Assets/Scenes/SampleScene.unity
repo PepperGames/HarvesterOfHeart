@@ -985,7 +985,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9974c0d7a2845fe439a3355fc500eff3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1942,6 +1942,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1007442209814237101}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1932179860 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1007442209828998806, guid: 50203d4380845e5469453c0940806115,
+    type: 3}
+  m_PrefabInstance: {fileID: 1007442209814237101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1973057569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,8 +2124,8 @@ MonoBehaviour:
   whatIsMenorah:
     serializedVersion: 2
     m_Bits: 8192
-  clips:
-  - {fileID: 8300000, guid: 9390f03dfaf680c4da36d30c5ca84c4f, type: 3}
+  audioSources:
+  - {fileID: 1995109387}
 --- !u!4 &1995109385
 Transform:
   m_ObjectHideFlags: 0
@@ -2160,7 +2166,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9390f03dfaf680c4da36d30c5ca84c4f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2634,6 +2640,31 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5201242599923457114, guid: 50203d4380845e5469453c0940806115,
+        type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 1597299698}
+    - target: {fileID: 5201242599923457114, guid: 50203d4380845e5469453c0940806115,
+        type: 3}
+      propertyPath: fillImage
+      value: 
+      objectReference: {fileID: 82208785}
+    - target: {fileID: 5201242599923457114, guid: 50203d4380845e5469453c0940806115,
+        type: 3}
+      propertyPath: attackPos
+      value: 
+      objectReference: {fileID: 1932179860}
+    - target: {fileID: 5201242599923457114, guid: 50203d4380845e5469453c0940806115,
+        type: 3}
+      propertyPath: whatIsEnemies.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201242599923457114, guid: 50203d4380845e5469453c0940806115,
+        type: 3}
+      propertyPath: audioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 996231195}
     - target: {fileID: 5480720853161725762, guid: 50203d4380845e5469453c0940806115,
         type: 3}
       propertyPath: m_RootOrder
@@ -2651,5 +2682,5 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: a92dc6e7fa29390428112adf5fcbf1c0, type: 2}
     m_RemovedComponents:
     - {fileID: 0}
-    - {fileID: 1007442211185112154, guid: 50203d4380845e5469453c0940806115, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 50203d4380845e5469453c0940806115, type: 3}

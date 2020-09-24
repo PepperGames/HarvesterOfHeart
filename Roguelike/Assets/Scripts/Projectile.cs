@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
         Player = GameObject.FindWithTag("Player").transform.position;
         damage = 5 * LevelGenerator.LVL;
         playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
-        print(Player);
+        //print(Player);
     }
 
 

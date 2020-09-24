@@ -111,7 +111,7 @@ public class PlayerHP : MonoBehaviour
         if (!isPlayedHP)
         {
             audioSource.clip = clips[0];
-            print(audioSource.clip);
+            //print(audioSource.clip);
             audioSource.Play();
             isPlayedHP = true;
         }
@@ -119,15 +119,15 @@ public class PlayerHP : MonoBehaviour
     //получение урона и снижение его под бафами свитка
     public void TakingDamage(float damage)
     {
-        print(attackable);
+        //print(attackable);
         if (attackable)
         {
             currentHP = currentHP - damage * currentDamageRatio;
             DisplayHP();
             isRed = true;
-            print(isRed);
+            //print(isRed);
             redVariable = 1.5f;
-            print(redVariable);
+            //print(redVariable);
             if (currentHP <= 0)
             {
                // SceneManager.LoadScene("OnLoseScene");

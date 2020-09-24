@@ -213,7 +213,7 @@ public class PlayerAttack : MonoBehaviour
     public void Attack1()
     {
         audioSource.clip = clips[1];
-        print(audioSource.clip);
+        //print(audioSource.clip);
         audioSource.Play();
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
         for (int i = 0; i < enemiesToDamage.Length; i++)

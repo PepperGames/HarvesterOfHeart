@@ -155,9 +155,9 @@ MonoBehaviour:
   GAmulet: {fileID: 8973415646572100677, guid: 343494dab2cbc3c4f88483b1f25959da, type: 3}
   BAmulet: {fileID: 8973415646572100677, guid: 9f6d67911b321914da3d9dc528d87ee8, type: 3}
   YAmulet: {fileID: 8973415646572100677, guid: 2318186c30fc08347a5b4b68a3f5bfe8, type: 3}
-  clips:
-  - {fileID: 8300000, guid: 279da6ca851c1584cad0d56766a8fa69, type: 3}
   anim: {fileID: 0}
+  audioSources:
+  - {fileID: 6962880186818081291}
 --- !u!50 &7449184587780658678
 Rigidbody2D:
   serializedVersion: 4
@@ -234,7 +234,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 279da6ca851c1584cad0d56766a8fa69, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

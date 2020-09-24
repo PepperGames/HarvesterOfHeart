@@ -10,8 +10,7 @@ public class BigWomenBeam : MonoBehaviour
     private float timeBtwDamage;
     private bool right;
     public float speed;
-    public AudioClip[] clips;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     void Start()
     {
         damage = 5 * LevelGenerator.LVL;
@@ -22,9 +21,7 @@ public class BigWomenBeam : MonoBehaviour
             right = false;
         else right = true;
 
-        audioSource = GetComponent<AudioSource>();
 
-        audioSource.clip = clips[0];
         print(audioSource.clip);
         audioSource.Play();
     }

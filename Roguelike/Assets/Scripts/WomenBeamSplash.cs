@@ -8,8 +8,7 @@ public class WomenBeamSplash : MonoBehaviour
     public float damage;
     public float timeToDestroy;
     float timeBtwDamage;
-    public AudioClip[] clips;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     void Start()
     {
         damage = 5 * LevelGenerator.LVL;
@@ -18,7 +17,6 @@ public class WomenBeamSplash : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        audioSource.clip = clips[0];
         print(audioSource.clip);
         audioSource.Play();
     }

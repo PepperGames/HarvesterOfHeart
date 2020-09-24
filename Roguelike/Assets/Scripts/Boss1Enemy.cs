@@ -37,6 +37,8 @@ public class Boss1Enemy : MonoBehaviour
     //анимации
     public Animator anim;
 
+    public AudioSource[] audioSources;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -53,6 +55,9 @@ public class Boss1Enemy : MonoBehaviour
         speed = Random.Range(1f, 3f);
         DisplayHP();
         anim = GetComponent<Animator>();
+
+        print(audioSources[0].clip);
+        audioSources[0].Play();
     }
 
 

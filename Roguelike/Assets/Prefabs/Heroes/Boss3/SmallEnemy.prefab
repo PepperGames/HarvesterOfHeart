@@ -143,8 +143,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   deathEffect: {fileID: 4504198882179723904, guid: 6e83a8b6927d3ed4bbff5e107f5ec48b,
     type: 3}
-  clips:
-  - {fileID: 8300000, guid: feb07d8099e78d444b88a758fb2c0ac7, type: 3}
+  audioSources:
+  - {fileID: 1854496220659396435}
 --- !u!50 &4384153701926478962
 Rigidbody2D:
   serializedVersion: 4
@@ -237,7 +237,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: feb07d8099e78d444b88a758fb2c0ac7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
