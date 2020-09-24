@@ -19,7 +19,7 @@ MonoBehaviour:
   imageInfo: {fileID: 1900766665923897559, guid: b9ca3ccce428ae04896f3dc544b95bed,
     type: 3}
   itemTextInfo: {fileID: 0}
---- !u!114 &6490096201602705442
+--- !u!114 &8814846654165563077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,9 +28,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3442458123657725997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dee55a5678340b438ca238b92ff32c9, type: 3}
+  m_Script: {fileID: 11500000, guid: ca47f01cdfc09e34cb3cb36d4d80e588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  target: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 31306effa92354944aba1ab7c08f7293, type: 3}
+  buffPosition: {fileID: 0}
 --- !u!1001 &933209611724182823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,6 +42,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7067187873776922273, guid: df32d059bc730904182b558af936a0da,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 31306effa92354944aba1ab7c08f7293, type: 3}
     - target: {fileID: 2537070708816223498, guid: df32d059bc730904182b558af936a0da,
         type: 3}
       propertyPath: m_Name
@@ -46,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 2537070708816223498, guid: df32d059bc730904182b558af936a0da,
         type: 3}
       propertyPath: m_TagString
-      value: Scroll
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2537070708816223499, guid: df32d059bc730904182b558af936a0da,
         type: 3}
@@ -162,7 +171,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6490096201602705442}
+      objectReference: {fileID: 0}
     - target: {fileID: 2537070708816223500, guid: df32d059bc730904182b558af936a0da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -204,7 +213,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6490096201602705442}
+      objectReference: {fileID: 0}
     - target: {fileID: 7294341084613524489, guid: df32d059bc730904182b558af936a0da,
         type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

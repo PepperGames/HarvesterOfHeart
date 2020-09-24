@@ -87,6 +87,7 @@ public class Player : MonoBehaviour
 
     public AudioSource[] audioSources;
 
+    private List<Buff> buffs = new List<Buff>();
     private void Start()
     {
         //атака
@@ -118,6 +119,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         DisplayHP();
+        HandleBuff();
         //движение
         switch (state)
         {
@@ -203,13 +205,6 @@ public class Player : MonoBehaviour
                 }
                 break;
         }
-        //атака
-        if (Input.GetKeyUp("2"))
-        {
-            UseSoul();
-        }
-
-
         //хп
         if (currentHP / currentMaxHP < 0.15f)
         {
@@ -229,14 +224,6 @@ public class Player : MonoBehaviour
             {
                 changeColorTime--;
             }
-        }
-        if (Input.GetKeyUp("1"))
-        {
-            UseHPPotion();
-        }
-        if (Input.GetKeyUp("3"))
-        {
-            UseScroll();
         }
         ChangeColor();
     }
@@ -392,58 +379,58 @@ public class Player : MonoBehaviour
     //        }
 
     //    }
-    //}
-    public void UseSoul()
-    {
-        if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
-        {
-            for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
-            {
-                if (inventory.slots[i].transform.childCount > 0)
-                {
-                    if (inventory.slots[i].transform.GetChild(0).CompareTag("Soul"))
-                    {
-                        currentDamage = currentMaxDamage * 1.25f;
-                        timeForSoul = 15f;
-                        CenterAnim.SetInteger("state", 2);
-                        inventory.isFull[i] = false;
-                        isPlayed = false;
-                        foreach (Transform t in inventory.slots[i].transform)
-                        {
-                            Destroy(t.gameObject);
-                        }
-                        break;
-                    }
-                }
-                else
-                {
-                    continue;
-                }
+    ////}
+    //public void UseSoul()
+    //{
+    //    if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
+    //    {
+    //        for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
+    //        {
+    //            if (inventory.slots[i].transform.childCount > 0)
+    //            {
+    //                if (inventory.slots[i].transform.GetChild(0).CompareTag("Soul"))
+    //                {
+    //                    currentDamage = currentMaxDamage * 1.25f;
+    //                    timeForSoul = 15f;
+    //                    CenterAnim.SetInteger("state", 2);
+    //                    inventory.isFull[i] = false;
+    //                    isPlayed = false;
+    //                    foreach (Transform t in inventory.slots[i].transform)
+    //                    {
+    //                        Destroy(t.gameObject);
+    //                    }
+    //                    break;
+    //                }
+    //            }
+    //            else
+    //            {
+    //                continue;
+    //            }
 
-            }
-        }
-    }
-    public void UseSoul(int selSlot)
-    {
-        if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
-        {
-            if (inventory.slots[selSlot].transform.childCount > 0)
-            {
-                if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("Soul"))
-                {
-                    currentDamage = currentMaxDamage * 1.25f;
-                    timeForSoul = 15f;
-                    CenterAnim.SetInteger("state", 2);
-                    inventory.isFull[selSlot] = false;
-                    isPlayed = false;
-                    foreach (Transform t in inventory.slots[selSlot].transform)
-                    {
-                        Destroy(t.gameObject);
-                    }
-                }
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
+    //public void UseSoul(int selSlot)
+    //{
+    //    if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
+    //    {
+    //        if (inventory.slots[selSlot].transform.childCount > 0)
+    //        {
+    //            if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("Soul"))
+    //            {
+    //                currentDamage = currentMaxDamage * 1.25f;
+    //                timeForSoul = 15f;
+    //                CenterAnim.SetInteger("state", 2);
+    //                inventory.isFull[selSlot] = false;
+    //                isPlayed = false;
+    //                foreach (Transform t in inventory.slots[selSlot].transform)
+    //                {
+    //                    Destroy(t.gameObject);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     public void DamageBuff(float damaheBuff)
     {
@@ -586,62 +573,62 @@ public class Player : MonoBehaviour
     }
 
     //восполнение хп
-    public void UseHPPotion()
-    {
-        for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
-        {
-            if (inventory.slots[i].transform.childCount > 0)
-            {
-                if (inventory.slots[i].transform.GetChild(0).CompareTag("HealthPotion"))
-                {
-                    currentHP += maxHP * 0.05f;
-                    CenterAnim.SetInteger("state", 1);
-                    if (currentHP > currentMaxHP)
-                    {
-                        currentHP = currentMaxHP;
-                    }
-                    isPlayedHP = false;
-                    DisplayHP();
-                    inventory.isFull[i] = false;
-                    foreach (Transform t in inventory.slots[i].transform)
-                    {
-                        Destroy(t.gameObject);
-                    }
-                    break;
-                }
+    //public void UseHPPotion()
+    //{
+    //    for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
+    //    {
+    //        if (inventory.slots[i].transform.childCount > 0)
+    //        {
+    //            if (inventory.slots[i].transform.GetChild(0).CompareTag("HealthPotion"))
+    //            {
+    //                currentHP += maxHP * 0.05f;
+    //                CenterAnim.SetInteger("state", 1);
+    //                if (currentHP > currentMaxHP)
+    //                {
+    //                    currentHP = currentMaxHP;
+    //                }
+    //                isPlayedHP = false;
+    //                DisplayHP();
+    //                inventory.isFull[i] = false;
+    //                foreach (Transform t in inventory.slots[i].transform)
+    //                {
+    //                    Destroy(t.gameObject);
+    //                }
+    //                break;
+    //            }
 
-            }
-            else
-            {
-                continue;
-            }
+    //        }
+    //        else
+    //        {
+    //            continue;
+    //        }
 
-        }
-        DisplayHP();
-    }
-    public void UseHPPotion(int selSlot)
-    {
-        if (inventory.slots[selSlot].transform.childCount > 0)
-        {
-            if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("HealthPotion"))
-            {
-                currentHP += maxHP * 0.05f;
-                CenterAnim.SetInteger("state", 1);
-                if (currentHP > currentMaxHP)
-                {
-                    currentHP = currentMaxHP;
-                }
-                isPlayedHP = false;
-                DisplayHP();
-                inventory.isFull[selSlot] = false;
-                foreach (Transform t in inventory.slots[selSlot].transform)
-                {
-                    Destroy(t.gameObject);
-                }
-            }
-        }
-        DisplayHP();
-    }
+    //    }
+    //    DisplayHP();
+    //}
+    //public void UseHPPotion(int selSlot)
+    //{
+    //    if (inventory.slots[selSlot].transform.childCount > 0)
+    //    {
+    //        if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("HealthPotion"))
+    //        {
+    //            currentHP += maxHP * 0.05f;
+    //            CenterAnim.SetInteger("state", 1);
+    //            if (currentHP > currentMaxHP)
+    //            {
+    //                currentHP = currentMaxHP;
+    //            }
+    //            isPlayedHP = false;
+    //            DisplayHP();
+    //            inventory.isFull[selSlot] = false;
+    //            foreach (Transform t in inventory.slots[selSlot].transform)
+    //            {
+    //                Destroy(t.gameObject);
+    //            }
+    //        }
+    //    }
+    //    DisplayHP();
+    //}
     //public void UseHPPotionOnButton()
     //{
     //    GameObject parent = transform.parent.gameObject;
@@ -660,58 +647,58 @@ public class Player : MonoBehaviour
     //    DisplayHP();
     //}
 
-    public void UseScroll()
-    {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
-        {
-            for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
-            {
-                if (inventory.slots[i].transform.childCount > 0)
-                {
-                    if (inventory.slots[i].transform.GetChild(0).CompareTag("Scroll"))
-                    {
-                        currentDamageRatio = currentMaxDamageRatio * 0.75f;
-                        timeForScroll = 15f;
-                        CenterAnim.SetInteger("state", 3);
-                        inventory.isFull[i] = false;
-                        isPlayedScroll = false;
-                        foreach (Transform t in inventory.slots[i].transform)
-                        {
-                            Destroy(t.gameObject);
-                        }
-                        break;
-                    }
-                }
-                else
-                {
-                    continue;
-                }
+    //public void UseScroll()
+    //{
+    //    if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
+    //    {
+    //        for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
+    //        {
+    //            if (inventory.slots[i].transform.childCount > 0)
+    //            {
+    //                if (inventory.slots[i].transform.GetChild(0).CompareTag("Scroll"))
+    //                {
+    //                    currentDamageRatio = currentMaxDamageRatio * 0.75f;
+    //                    timeForScroll = 15f;
+    //                    CenterAnim.SetInteger("state", 3);
+    //                    inventory.isFull[i] = false;
+    //                    isPlayedScroll = false;
+    //                    foreach (Transform t in inventory.slots[i].transform)
+    //                    {
+    //                        Destroy(t.gameObject);
+    //                    }
+    //                    break;
+    //                }
+    //            }
+    //            else
+    //            {
+    //                continue;
+    //            }
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
-    public void UseScroll(int selSlot)
-    {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
-        {
-            if (inventory.slots[selSlot].transform.childCount > 0)
-            {
-                if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("Scroll"))
-                {
-                    currentDamageRatio = currentMaxDamageRatio * 0.75f;
-                    timeForScroll = 15f;
-                    CenterAnim.SetInteger("state", 3);
-                    isPlayedScroll = false;
-                    inventory.isFull[selSlot] = false;
-                    foreach (Transform t in inventory.slots[selSlot].transform)
-                    {
-                        Destroy(t.gameObject);
-                    }
-                }
-            }
-        }
-    }
+    //public void UseScroll(int selSlot)
+    //{
+    //    if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
+    //    {
+    //        if (inventory.slots[selSlot].transform.childCount > 0)
+    //        {
+    //            if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("Scroll"))
+    //            {
+    //                currentDamageRatio = currentMaxDamageRatio * 0.75f;
+    //                timeForScroll = 15f;
+    //                CenterAnim.SetInteger("state", 3);
+    //                isPlayedScroll = false;
+    //                inventory.isFull[selSlot] = false;
+    //                foreach (Transform t in inventory.slots[selSlot].transform)
+    //                {
+    //                    Destroy(t.gameObject);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
 
     private void DisplayHP()
@@ -814,5 +801,31 @@ public class Player : MonoBehaviour
             }
 
         }
+    }
+
+    public bool AddBuff(Buff buff)
+    {
+        if (!buffs.Exists(x => x.GetType() == buff.GetType()))
+        {
+            buffs.Add(buff);
+            return true;
+        }
+        return false;
+    }
+    private void HandleBuff()
+    {
+        foreach (Buff buff in buffs)
+        {
+            buff.Update();
+        }
+    }
+    public bool RemoveBuff(Buff buff)
+    {
+        if (buffs.Exists(x => x.GetType() == buff.GetType()))
+        {
+            buffs.Remove(buff);
+            return true;
+        }
+        return false;
     }
 }
