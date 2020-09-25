@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class Scroll : MonoBehaviour
 {
     public GameObject player;
@@ -21,10 +22,12 @@ public class Scroll : MonoBehaviour
             ApplyBuff();
         }
     }
-    private void ApplyBuff()
+    public void ApplyBuff()
     {
         if (target.AddBuff(new ScrollBuff(target, audioClip, buffPosition)))
         {
+            int selectedSlot = gameObject.GetComponentInParent<Slot>().number;
+            player.GetComponent<Inventory>().isFull[selectedSlot] = false;
             Destroy(gameObject);
         }
     }

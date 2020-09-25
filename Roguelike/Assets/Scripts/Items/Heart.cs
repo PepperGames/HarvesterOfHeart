@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soul : MonoBehaviour
+public class Heart : MonoBehaviour
 {
     public GameObject player;
     public Player target;
@@ -17,14 +17,14 @@ public class Soul : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKeyDown("1"))
         {
             ApplyBuff();
         }
     }
     public void ApplyBuff()
     {
-        if (target.AddBuff(new SoulBuff(target, audioClip, buffPosition)))
+        if (target.AddBuff(new HeartBuff(target, audioClip, buffPosition)))
         {
             int selectedSlot = gameObject.GetComponentInParent<Slot>().number;
             player.GetComponent<Inventory>().isFull[selectedSlot] = false;

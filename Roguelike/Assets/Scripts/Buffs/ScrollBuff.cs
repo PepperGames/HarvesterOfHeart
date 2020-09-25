@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class ScrollBuff : Buff
 {
-    private float time = 5f;
+    private float time = 15f;
     private bool clipIsStarted = false;
     public ScrollBuff(Player target, AudioClip audioClip, GameObject buffPosition) : base(target, audioClip, buffPosition)
     {
 
     }
 
-    // Update is called once per frame
    public override void Update()
     {
         if (!clipIsStarted)
@@ -21,7 +20,7 @@ public class ScrollBuff : Buff
             audioSource.Play();
             clipIsStarted = true;
         }
-        buffPosition.GetComponent<Animator>().SetInteger("state", 2);
+        buffPosition.GetComponent<Animator>().SetInteger("state", 3);
         if (time<=0)
         {
             target.currentDamageRatio = target.currentMaxDamageRatio;

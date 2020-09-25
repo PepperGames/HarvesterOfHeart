@@ -26,6 +26,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3230408686580355596, guid: 35ab7c699e488444c94a801e965b3a09,
+        type: 3}
+      propertyPath: MinDistance
+      value: 1.1340902
+      objectReference: {fileID: 0}
     - target: {fileID: 8973415646572100676, guid: 35ab7c699e488444c94a801e965b3a09,
         type: 3}
       propertyPath: m_Radius

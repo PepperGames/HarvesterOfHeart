@@ -701,7 +701,7 @@ public class Player : MonoBehaviour
     //}
 
 
-    private void DisplayHP()
+    public void DisplayHP()
     {
         float HPSlider = currentHP / currentMaxHP;
 
