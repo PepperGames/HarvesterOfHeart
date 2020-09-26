@@ -285,7 +285,7 @@ MonoBehaviour:
   timeBtwAttac: 0
   SpawnMob: {fileID: 6479657402377729086, guid: b97a0433339ddc0499e6dd5c862ceb3b,
     type: 3}
-  startTimeToSplashAttack: 6
+  startTimeToSplashAttack: 4
   splashAttackPositiont: {fileID: 1526576574776943653}
   HealthPotion: {fileID: 8973415646572100677, guid: 35ab7c699e488444c94a801e965b3a09,
     type: 3}

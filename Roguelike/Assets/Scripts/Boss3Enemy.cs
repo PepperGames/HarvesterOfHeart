@@ -29,8 +29,10 @@ public class Boss3Enemy : Person
     public GameObject SpawnMob;
     //время перед сплеш атакой
     public float startTimeToSplashAttack;
+    [SerializeField]
     private float timeToSplashAttack;
     public GameObject splashAttackPositiont;
+    private bool splashAttacking = false;
     //что дропает
     public GameObject HealthPotion, Scroll, Soull, GAmulet, BAmulet, YAmulet;
     //анимации
@@ -100,22 +102,41 @@ public class Boss3Enemy : Person
             isMoving = false;
         }
 
-
-        //если ты под некром стоишь больше старт секунд и расстояние меньше 1.7 то отталкивает
-        if (Vector2.Distance(transform.position, Player.transform.position) < 1.7f)
+        if (!splashAttacking)
         {
-            timeToSplashAttack += Time.deltaTime;
-            if (timeToSplashAttack >= startTimeToSplashAttack)
+            //если ты под некром стоишь больше старт секунд и расстояние меньше 1.7 то отталкивает
+            if (Vector2.Distance(transform.position, Player.transform.position) < 1.7f)
             {
-                print(audioSources[1].clip);
-                audioSources[1].Play();
-                anim.SetInteger("state", 4);
+                timeToSplashAttack += Time.deltaTime;
+                if (timeToSplashAttack >= startTimeToSplashAttack)
+                {
+                    print(audioSources[1].clip);
+                    audioSources[1].Play();
+                    anim.SetInteger("state", 4);
+                    splashAttacking = true;
+                    timeToSplashAttack = timeToSplashAttack / 2.3f;
+                    isMoving = false;
+                }
+            }
+            else
+            {
+                timeToSplashAttack = 0;
+                splashAttacking = false;
             }
         }
-        else
+        else 
         {
-            timeToSplashAttack = 0;
+            timeToSplashAttack -= Time.deltaTime;
+            if (timeToSplashAttack >= 0.5f && timeToSplashAttack <= 1.5f)
+            {
+                SplashShoot();
+            }
+            if (timeToSplashAttack <= 0)
+            {
+                splashAttacking = false;
+            }
         }
+        
 
 
         if (isMoving)
