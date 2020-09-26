@@ -103,7 +103,7 @@ public class Player : Person
         //хп
         maxHP = 12f;
         currentHP = currentMaxHP = maxHP;
-        maxDamageRatio = currentMaxDamageRatio = currentDamageRatio = 0;
+        maxDamageRatio = currentMaxDamageRatio = currentDamageRatio = 1;
         DisplayHP();
         color1 = new Color(255, 255, 255, 1f);
         color2 = new Color(255, 255, 255, 0f);
@@ -438,6 +438,7 @@ public class Player : Person
         //пошаманить потом
         currentMaxHP = maxHP;
         currentHP += 16f;
+        currentMaxDamage = MaxDamage;
         if (currentHP > currentMaxHP)
         {
             currentHP = currentMaxHP;
