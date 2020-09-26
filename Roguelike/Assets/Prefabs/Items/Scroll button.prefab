@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4885797900424416181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3442458123657725997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dee55a5678340b438ca238b92ff32c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6454719210800963292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +183,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4885797900424416181}
     - target: {fileID: 2537070708816223500, guid: df32d059bc730904182b558af936a0da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -213,11 +225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8814846654165563077}
+      objectReference: {fileID: 4885797900424416181}
     - target: {fileID: 7294341084613524489, guid: df32d059bc730904182b558af936a0da,
         type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ApplyBuff
+      value: Drop
       objectReference: {fileID: 0}
     - target: {fileID: 7294341084613524489, guid: df32d059bc730904182b558af936a0da,
         type: 3}
@@ -240,8 +252,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 8300858619781191328, guid: df32d059bc730904182b558af936a0da, type: 3}
-    - {fileID: 5188739698523170143, guid: df32d059bc730904182b558af936a0da, type: 3}
+    - {fileID: 0}
+    - {fileID: 5080693975758506515, guid: df32d059bc730904182b558af936a0da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df32d059bc730904182b558af936a0da, type: 3}
 --- !u!1 &3442458123657725997 stripped
 GameObject:

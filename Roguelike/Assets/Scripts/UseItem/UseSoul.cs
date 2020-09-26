@@ -7,8 +7,8 @@ public class UseSoul : MonoBehaviour
     public void Use()
     {
         int selectedSlot = gameObject.GetComponentInParent<Slot>().number;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().UseSoul(selectedSlot);
-
+        gameObject.GetComponent<Soul>().ApplyBuff();
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().UseSoul(selectedSlot);
     }
     public void Drop()
     {

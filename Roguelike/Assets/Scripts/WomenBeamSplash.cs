@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WomenBeamSplash : MonoBehaviour
 {
-    private PlayerHP playerHP;
+    private Player player;
     public float damage;
     public float timeToDestroy;
     float timeBtwDamage;
@@ -12,7 +12,7 @@ public class WomenBeamSplash : MonoBehaviour
     void Start()
     {
         damage = 5 * LevelGenerator.LVL;
-        playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         timeBtwDamage = timeToDestroy;
 
         audioSource = GetComponent<AudioSource>();
@@ -38,6 +38,6 @@ public class WomenBeamSplash : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        playerHP.TakingDamage((damage * Time.deltaTime * 0.58f)/ timeBtwDamage);
+        player.TakingDamage((damage * Time.deltaTime * 0.58f)/ timeBtwDamage);
     }
 }

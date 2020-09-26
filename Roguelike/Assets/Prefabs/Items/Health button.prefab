@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7294341084613524489}
   - component: {fileID: -7067187873776922273}
   - component: {fileID: 5188739698523170143}
+  - component: {fileID: 5080693975758506515}
   m_Layer: 5
   m_Name: Health button
   m_TagString: HealthPotion
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5080693975758506515}
         m_MethodName: Use
         m_Mode: 1
         m_Arguments:
@@ -230,8 +231,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5188739698523170143}
-          m_MethodName: ApplyBuff
+        - m_Target: {fileID: 5080693975758506515}
+          m_MethodName: Drop
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -353,3 +354,15 @@ MonoBehaviour:
   target: {fileID: 0}
   audioClip: {fileID: 8300000, guid: c84f4505720ce1d468adcd6fb14cbe35, type: 3}
   buffPosition: {fileID: 0}
+--- !u!114 &5080693975758506515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537070708816223498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d38bbc0c0e4a2242aa8684a3296609e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UseGAmulet : MonoBehaviour
+public class UseRAmulet : MonoBehaviour
 {
     public void Use()
     {

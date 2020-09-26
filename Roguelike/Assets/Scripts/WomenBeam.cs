@@ -6,7 +6,7 @@ public class WomenBeam : MonoBehaviour
 {
     public float damage;
     public float timeBtwAttac;
-    private PlayerHP playerHP;
+    private Player player;
     public GameObject attackPos;
     public float attackRange;
     public LayerMask whatIsEnemies;
@@ -14,7 +14,7 @@ public class WomenBeam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         damage = 5 * LevelGenerator.LVL;
 
         print(audioSource.clip);
@@ -26,7 +26,7 @@ public class WomenBeam : MonoBehaviour
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.transform.position, attackRange, whatIsEnemies);
         if (enemiesToDamage.Length > 0)
         {
-            playerHP.TakingDamage(damage / 16);
+            player.TakingDamage(damage / 16);
         }   
             
     }

@@ -123,6 +123,10 @@ public class Slot : MonoBehaviour
                 SwapItem(selectedSlot);
             }
         }
+        else if(type == "consumable")
+        {
+
+        }
     }
 
     public void PutOutItem(int selectedSlot)

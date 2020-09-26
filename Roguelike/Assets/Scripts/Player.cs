@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Threading;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class Player : MonoBehaviour
+public class Player : Person
 {
     //движение
     public float speed;
@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 
 
     public float startTimeBtwAttac;
-    public float timeForSoul;
 
     public float MaxDamage; //максимальный урон без шмотки
     public float currentMaxDamage; //максимальный урон под бафом шмотки
@@ -68,10 +67,11 @@ public class Player : MonoBehaviour
     public float currentMaxDamageRatio;//текущий под бафом шмотки
     public float currentDamageRatio;//текущий коеф дамага
 
+    SpriteRenderer spriteRenderer;
+    bool isRed = false;
 
     public Slider slider;
     public Image fillImage;
-    public float timeForScroll;
 
     private Color color1;
     private Color color2;
@@ -79,8 +79,6 @@ public class Player : MonoBehaviour
 
     public bool attackable;
 
-    private SpriteRenderer spriteRenderer;
-    private bool isRed;
     private float redVariable;
     private bool isPlayedHP = false;
     private bool isPlayedScroll = false;
@@ -105,7 +103,7 @@ public class Player : MonoBehaviour
         //хп
         maxHP = 12f;
         currentHP = currentMaxHP = maxHP;
-        maxDamageRatio = currentMaxDamageRatio = 1;
+        maxDamageRatio = currentMaxDamageRatio = currentDamageRatio = 0;
         DisplayHP();
         color1 = new Color(255, 255, 255, 1f);
         color2 = new Color(255, 255, 255, 0f);
@@ -302,26 +300,7 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        //атака
-        if (timeForSoul > 0f)
-        {
-            timeForSoul -= Time.deltaTime;
-            CenterAnim.SetInteger("state", 2);
-            if (!isPlayed)
-            {
-                //audioSource.clip = clips[0];
-                //print(audioSource.clip);
-                //audioSource.Play();
-                //isPlayed = true;
-            }
-        }
-        else
-        {
-            currentDamage = currentMaxDamage;
-            if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
-                CenterAnim.SetInteger("state", 0);
-
-        }
+        
         ////хп
         //if (timeForScroll > 0f)
         //{
@@ -472,25 +451,9 @@ public class Player : MonoBehaviour
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
-            if (enemiesToDamage[i].GetComponent<Enemy>() != null)
+            if (enemiesToDamage[i].GetComponent<Person>() != null)
             {
-                enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(currentDamage);
-            }
-            else if (enemiesToDamage[i].GetComponent<SmallEnemy>() != null)
-            {
-                enemiesToDamage[i].GetComponent<SmallEnemy>().TakeDamage(currentDamage);
-            }
-            else if (enemiesToDamage[i].GetComponent<Boss1Enemy>() != null)
-            {
-                enemiesToDamage[i].GetComponent<Boss1Enemy>().TakeDamage(currentDamage);
-            }
-            else if (enemiesToDamage[i].GetComponent<Boss2Enemy>() != null)
-            {
-                enemiesToDamage[i].GetComponent<Boss2Enemy>().TakeDamage(currentDamage);
-            }
-            else if (enemiesToDamage[i].GetComponent<Boss3Enemy>() != null)
-            {
-                enemiesToDamage[i].GetComponent<Boss3Enemy>().TakeDamage(currentDamage);
+                enemiesToDamage[i].GetComponent<Person>().TakingDamage(currentDamage);
             }
         }
     }
@@ -567,7 +530,7 @@ public class Player : MonoBehaviour
         //GUILayout.EndArea();
     }
     //хп
-    public void TakingDamage(float damage)
+    public override void TakingDamage(float damage)
     {
         print(attackable);
         if (attackable)

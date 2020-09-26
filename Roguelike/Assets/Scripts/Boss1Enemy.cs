@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss1Enemy : MonoBehaviour
+public class Boss1Enemy : Person
 {
     //движение
     public float speed;
@@ -21,7 +21,7 @@ public class Boss1Enemy : MonoBehaviour
     private float damage;
     public LayerMask whatIsEnemies;
     //хп гг
-    private PlayerHP playerHP;
+    private Player playerHP;
     //простая атака
     public float startTimeBtwAttac;
     public float timeBtwAttac = 3;
@@ -39,6 +39,10 @@ public class Boss1Enemy : MonoBehaviour
 
     public AudioSource[] audioSources;
 
+    SpriteRenderer spriteRenderer;
+    bool isRed = false;
+    private float redVariable;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -50,7 +54,7 @@ public class Boss1Enemy : MonoBehaviour
             isMooving = true;
         }
         damage = 3 * LevelGenerator.LVL;
-        playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
+        playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         maxHP = currentHP = 40 *( LevelGenerator.LVL + LevelGenerator.LVL/3);
         speed = Random.Range(1f, 3f);
         DisplayHP();
@@ -58,6 +62,9 @@ public class Boss1Enemy : MonoBehaviour
 
         print(audioSources[0].clip);
         audioSources[0].Play();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        isRed = false;
     }
 
 
@@ -125,8 +132,7 @@ public class Boss1Enemy : MonoBehaviour
             PathToPlayer = PathFinder.GetPath(Player.transform.position);
             isMooving = true;
         }
-
-
+        ChangeColor();
     }
     void Shoot()
     {
@@ -145,9 +151,11 @@ public class Boss1Enemy : MonoBehaviour
         slider.value = HPSlider;
     }
 
-    public void TakeDamage(float damage)
+    public override void TakingDamage(float damage)
     {
         currentHP -= damage;
+        isRed = true;
+        redVariable = 1.5f;
         DisplayHP();
         if (currentHP <= 0)
         {
@@ -160,6 +168,21 @@ public class Boss1Enemy : MonoBehaviour
 
             GameObject.FindGameObjectWithTag("levelGenerator").GetComponent<LevelGenerator>().DecreaseMobCountOnLvl();
             RIP();
+        }
+    }
+    private void ChangeColor()
+    {
+        if (isRed)
+        {
+            if (redVariable >= 1)
+            {
+                redVariable -= 0.03f;
+                spriteRenderer.color = new Color(1f, 1f / redVariable, 1f / redVariable, 1f);
+            }
+            else
+            {
+                isRed = false;
+            }
         }
     }
     void Drop()

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Boss2Enemy : MonoBehaviour
+public class Boss2Enemy : Person
 {
     //хп
     public float currentHP;
@@ -35,6 +35,9 @@ public class Boss2Enemy : MonoBehaviour
 
     public AudioSource[] audioSources;
 
+    SpriteRenderer spriteRenderer;
+    bool isRed = false;
+    private float redVariable;
     void Start()
     {
         maxHP = currentHP = 40 * (LevelGenerator.LVL + LevelGenerator.LVL / 3);
@@ -42,6 +45,9 @@ public class Boss2Enemy : MonoBehaviour
         shootCount = startShootCount;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        isRed = false;
     }
            
 
@@ -91,11 +97,14 @@ public class Boss2Enemy : MonoBehaviour
             anim.SetInteger("state", 0);
             timeBtwPowerAttac -= Time.deltaTime;
         }
+        ChangeColor();
     }
 
-    public void TakeDamage(float damage)
+    public override void TakingDamage(float damage)
     {
         currentHP -= damage;
+        isRed = true;
+        redVariable = 1.5f;
         DisplayHP();
         if (currentHP <= 0)
         {
@@ -111,6 +120,21 @@ public class Boss2Enemy : MonoBehaviour
 
             RIP();
 
+        }
+    }
+    private void ChangeColor()
+    {
+        if (isRed)
+        {
+            if (redVariable >= 1)
+            {
+                redVariable -= 0.03f;
+                spriteRenderer.color = new Color(1f, 1f / redVariable, 1f / redVariable, 1f);
+            }
+            else
+            {
+                isRed = false;
+            }
         }
     }
 

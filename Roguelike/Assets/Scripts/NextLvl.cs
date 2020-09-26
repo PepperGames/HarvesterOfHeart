@@ -70,11 +70,8 @@ public class NextLvl : MonoBehaviour
             var objs2 = GameObject.FindGameObjectsWithTag("Enemy"); // возвращает МАССИВ!
             for (int i = 0; i < objs2.Length; i++)
                 Destroy(objs2[i]);
-            PlayerHP pl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
-            pl.LvlHPUp();
-            PlayerAttack p2 = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
-            p2.LvlDamageUp();
-
+            Player pl = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            pl.LvlUp();
 
             //GameObject go = GameObject.FindGameObjectWithTag("levelGenerator");
             levelGenerator.GetComponent<LevelGenerator>().RestartLVL();

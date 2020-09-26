@@ -44,7 +44,7 @@ PrefabInstance:
     - target: {fileID: 8973415646572100677, guid: 35ab7c699e488444c94a801e965b3a09,
         type: 3}
       propertyPath: m_TagString
-      value: SoulItem
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8973415646572100678, guid: 35ab7c699e488444c94a801e965b3a09,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemButton
       value: 
-      objectReference: {fileID: 5780439088435873372, guid: 947b44941733793479d467649191e4bb,
+      objectReference: {fileID: 1463972942437288074, guid: 947b44941733793479d467649191e4bb,
         type: 3}
     - target: {fileID: 8973415646572100681, guid: 35ab7c699e488444c94a801e965b3a09,
         type: 3}

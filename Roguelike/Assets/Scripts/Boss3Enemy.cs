@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss3Enemy : MonoBehaviour
+public class Boss3Enemy : Person
 {
     //движение
     public float speed;
@@ -21,7 +21,7 @@ public class Boss3Enemy : MonoBehaviour
     private float damage;
     public LayerMask whatIsEnemies;
     //хп гг
-    private PlayerHP playerHP;
+    private Player player;
     private bool isImpulse = false;
     //простая атака
     public float startTimeBtwAttac;
@@ -38,6 +38,9 @@ public class Boss3Enemy : MonoBehaviour
     private LevelGenerator levelGenerator;
     public AudioSource[] audioSources;
 
+    SpriteRenderer spriteRenderer;
+    bool isRed = false;
+    private float redVariable;
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -49,12 +52,15 @@ public class Boss3Enemy : MonoBehaviour
             isMoving = true;
         }
         damage = 3 * LevelGenerator.LVL;
-        playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         maxHP = currentHP = 40 * (LevelGenerator.LVL + LevelGenerator.LVL / 3);
         speed = Random.Range(1f, 3f);
         DisplayHP();
         anim = GetComponent<Animator>();
         levelGenerator = GameObject.FindGameObjectWithTag("levelGenerator").GetComponent<LevelGenerator>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        isRed = false;
     }
 
 
@@ -130,6 +136,8 @@ public class Boss3Enemy : MonoBehaviour
             PathToPlayer = PathFinder.GetPath(Player.transform.position);
             isMoving = true;
         }
+        ChangeColor();
+
     }
     public void Shoot()
     {
@@ -155,9 +163,11 @@ public class Boss3Enemy : MonoBehaviour
         slider.value = HPSlider;
     }
 
-    public void TakeDamage(float damage)
+    public override void TakingDamage(float damage)
     {
         currentHP -= damage;
+        isRed = true;
+        redVariable = 1.5f;
         DisplayHP();
         if (currentHP <= 0)
         {
@@ -169,6 +179,21 @@ public class Boss3Enemy : MonoBehaviour
             }
             GameObject.FindGameObjectWithTag("levelGenerator").GetComponent<LevelGenerator>().DecreaseMobCountOnLvl();
             RIP();
+        }
+    }
+    private void ChangeColor()
+    {
+        if (isRed)
+        {
+            if (redVariable >= 1)
+            {
+                redVariable -= 0.03f;
+                spriteRenderer.color = new Color(1f, 1f / redVariable, 1f / redVariable, 1f);
+            }
+            else
+            {
+                isRed = false;
+            }
         }
     }
     void Drop()
