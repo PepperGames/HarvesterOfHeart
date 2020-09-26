@@ -29,8 +29,7 @@ public class PlayerAttack : MonoBehaviour
     public GameObject Center;
     private Animator CenterAnim;
     private bool isPlayed = false;
-    public AudioClip[] clips;
-    AudioSource audioSource;
+    public AudioSource[] audioSources;
     private void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
@@ -39,8 +38,6 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         cam = Camera.main;
         CenterAnim = Center.GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-
     }
 
     void Update()
@@ -85,28 +82,7 @@ public class PlayerAttack : MonoBehaviour
             timeBtwAttac -= Time.deltaTime;
         }
     }
-    private void FixedUpdate()
-    {
-        if (timeForSoul > 0f)
-        {
-            timeForSoul -= Time.deltaTime;
-            CenterAnim.SetInteger("state", 2);
-            if (!isPlayed)
-            {
-                audioSource.clip = clips[0];
-                print(audioSource.clip);
-                audioSource.Play();
-                isPlayed = true;
-            }
-        }
-        else
-        {
-            currentDamage = currentMaxDamage;
-            if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
-                CenterAnim.SetInteger("state", 0);
-
-        }
-    }
+   
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -196,25 +172,24 @@ public class PlayerAttack : MonoBehaviour
     }
     public void LvlDamageUp()
     {
-        {
-            bool Is = false;
-            if (currentMaxDamage > MaxDamage)
-                Is = true;
-            MaxDamage = 2 * LevelGenerator.LVL;
-            currentMaxDamage = MaxDamage;
-            //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
-            if (Is)
-            {
-                AmuletBuff.SetBuff(0, 0.1f, 1);
-            }
-        }
+        //{
+        //    bool Is = false;
+        //    if (currentMaxDamage > MaxDamage)
+        //        Is = true;
+        //    MaxDamage = 2 * LevelGenerator.LVL;
+        //    currentMaxDamage = MaxDamage;
+        //    //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
+        //    if (Is)
+        //    {
+        //        AmuletBuff.SetBuff(0, 0.1f, 1);
+        //    }
+        //}
     }
 
     public void Attack1()
     {
-        audioSource.clip = clips[1];
-        //print(audioSource.clip);
-        audioSource.Play();
+        print(audioSources[0].clip);
+        audioSources[0].Play();
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {

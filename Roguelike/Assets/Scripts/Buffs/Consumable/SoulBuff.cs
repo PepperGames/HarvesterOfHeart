@@ -23,12 +23,15 @@ public class SoulBuff : Buff
         buffPosition.GetComponent<Animator>().SetInteger("state", 2);
         if (time <= 0)
         {
-            target.currentDamage = target.currentMaxDamage;
-            Debug.Log(time);
-            target.RemoveBuff(this);
+            DisableBuff();
         }
         target.currentDamage = target.currentMaxDamage * 1.25f;
 
         time -= Time.deltaTime;
+    }
+    public override void DisableBuff()
+    {
+        target.currentDamage = target.currentMaxDamage;
+        target.RemoveBuff(this);
     }
 }

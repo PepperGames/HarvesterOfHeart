@@ -52,7 +52,7 @@ public class LevelGenerator : MonoBehaviour
     {
 
         RestartLVL();
-        print(audioSources[0].clip);
+        //print(audioSources[0].clip);
         audioSources[0].Play();
     }
 

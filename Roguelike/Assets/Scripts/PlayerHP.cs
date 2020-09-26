@@ -312,23 +312,23 @@ public class PlayerHP : MonoBehaviour
 
     public void LvlHPUp()
     {
-        bool Is = false;
-        if (currentMaxHP > maxHP)
-            Is = true;
-        maxHP = 16 * LevelGenerator.LVL;
-        //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
-        //пошаманить потом
-        currentMaxHP = maxHP;
-        if (Is)
-        {
-            AmuletBuff.SetBuff(0.1f, 0, 1f);
-        }
-        currentHP += 12f;
-        if (currentHP > currentMaxHP)
-        {
-            currentHP = currentMaxHP;
-        }
-        DisplayHP();
+        //bool Is = false;
+        //if (currentMaxHP > maxHP)
+        //    Is = true;
+        //maxHP = 16 * LevelGenerator.LVL;
+        ////тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
+        ////пошаманить потом
+        //currentMaxHP = maxHP;
+        //if (Is)
+        //{
+        //    AmuletBuff.SetBuff(0.1f, 0, 1f);
+        //}
+        //currentHP += 12f;
+        //if (currentHP > currentMaxHP)
+        //{
+        //    currentHP = currentMaxHP;
+        //}
+        //DisplayHP();
     }
 
     public void HPBuff(float hpBuff)

@@ -15,7 +15,7 @@ public class SpawnItem : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = clips[0];
-        print(audioSource.clip);
+        //print(audioSource.clip);
         audioSource.Play();
     }
     public void SpawnDroppedItem()

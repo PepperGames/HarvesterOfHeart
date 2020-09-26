@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1470376603736230410}
   - component: {fileID: 4345032575562065726}
   m_Layer: 5
-  m_Name: GreenAmulet PickUp
+  m_Name: RedAmulet PickUp
   m_TagString: AmuletItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

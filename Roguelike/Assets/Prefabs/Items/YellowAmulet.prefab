@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6123546454704086725}
   - component: {fileID: 6633284865777207300}
   - component: {fileID: 6012579661911469221}
+  - component: {fileID: 7656208666544361851}
   m_Layer: 5
   m_Name: YellowAmulet
   m_TagString: YAmulet
@@ -381,3 +382,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7656208666544361851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537070708816223498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb19bc6ae685d74f8171c0f9ad94fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  target: {fileID: 0}
+  yellowAmuletBuff: {fileID: 0}

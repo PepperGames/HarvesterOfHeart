@@ -216,7 +216,7 @@ public class Enemy : MonoBehaviour
             {
                 if (timeBtwAttac <= 0)
                 {
-                    print(audioSources[0].clip);
+                    //print(audioSources[0].clip);
                     audioSources[0].Play();
                     if (Player.transform.position.x - transform.position.x < 0)
                     {

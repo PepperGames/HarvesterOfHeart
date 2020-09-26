@@ -11,7 +11,7 @@ public class ScrollBuff : Buff
 
     }
 
-   public override void Update()
+    public override void Update()
     {
         if (!clipIsStarted)
         {
@@ -21,14 +21,17 @@ public class ScrollBuff : Buff
             clipIsStarted = true;
         }
         buffPosition.GetComponent<Animator>().SetInteger("state", 3);
-        if (time<=0)
+        if (time <= 0)
         {
-            target.currentDamageRatio = target.currentMaxDamageRatio;
-            Debug.Log(time);
-            target.RemoveBuff(this);
+            DisableBuff();
         }
         target.currentDamageRatio = target.currentMaxDamageRatio * 0.75f;
 
         time -= Time.deltaTime;
+    }
+    public override void DisableBuff()
+    {
+        target.currentDamageRatio = target.currentMaxDamageRatio;
+        target.RemoveBuff(this);
     }
 }

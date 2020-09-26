@@ -27,7 +27,7 @@ public class PickUp : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 audioSource.clip = clips[0];
-                print(audioSource.clip);
+                //print(audioSource.clip);
                 audioSource.Play();
                 if (type == "consumable")
                 {
@@ -56,22 +56,27 @@ public class PickUp : MonoBehaviour
                         Instantiate(itemButton, inventory.slots[7].transform, false);
                         if (inventory.selectedSlot == 7)
                             //inventory.GetTextInfo(7);
+
+                            print("создаю в 7 слоте только что поднятій амулет");
                             inventory.slots[7].GetComponent<Slot>().PutOnItem(7);
                         foreach (Transform child in inventory.slots[7].transform)
                         {
-                            if (child.CompareTag("BAmulet"))
-                            {
-                                AmuletBuff.SetBuff(0, 0.1f, 1);
-                            }
-                            if (child.CompareTag("GAmulet"))
-                            {
-                                AmuletBuff.SetBuff(0.1f, 0, 1);
-                            }
-                            if (child.CompareTag("YAmulet"))
-                            {
-                                AmuletBuff.SetBuff(0, 0, 0.91f);
-                            }
+                            child.GetComponent<Amulet>().ApplyBuff();
+
+                            //if (child.CompareTag("BAmulet"))
+                            //{
+                            //    AmuletBuff.SetBuff(0, 0.1f, 1);
+                            //}
+                            //if (child.CompareTag("GAmulet"))
+                            //{
+                            //    AmuletBuff.SetBuff(0.1f, 0, 1);
+                            //}
+                            //if (child.CompareTag("YAmulet"))
+                            //{
+                            //    AmuletBuff.SetBuff(0, 0, 0.91f);
+                            //}
                             //inventory.slots[7].transform.GetChild(0).GetComponent<SpawnItem>().slotNumber = 7;
+                            print(child);
                             Destroy(gameObject);
                         }
                     }
@@ -85,8 +90,8 @@ public class PickUp : MonoBehaviour
                                 inventory.isFull[i] = true;
                                 Instantiate(itemButton, inventory.slots[i].transform, false);
                                 //if (inventory.selectedSlot == i)
-                                    //inventory.GetTextInfo(i);
-                                    //inventory.slots[i].transform.GetChild(0).GetComponent<SpawnItem>().slotNumber = i;
+                                //inventory.GetTextInfo(i);
+                                //inventory.slots[i].transform.GetChild(0).GetComponent<SpawnItem>().slotNumber = i;
                                 Destroy(gameObject);
                                 break;
                             }
@@ -106,7 +111,7 @@ public class PickUp : MonoBehaviour
             if (n >= 3)
             {
                 position.x = transform.position.x + 0.01f;
-                position.y = transform.position.y - (-Mathf.Pow((n - 3), 2) + 9)/ 500;
+                position.y = transform.position.y - (-Mathf.Pow((n - 3), 2) + 9) / 500;
                 //print($"{n}, {(-Mathf.Pow((n - 3), 2) + 9)}");
                 transform.position = position;
             }

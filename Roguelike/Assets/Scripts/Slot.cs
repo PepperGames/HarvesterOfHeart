@@ -21,16 +21,36 @@ public class Slot : MonoBehaviour
         {
             if (inventory.isFull[7] == true)
             {
-                AmuletBuff.SetBuff(0, 0, 1);
+                foreach (Transform child in transform)
+                {
+                    string type = child.GetComponent<SpawnItem>().type;
+                    if (type == "amulet")
+                    {
+                        child.GetComponent<Amulet>().DisableBuff();
+                    }
+                    print(child);
+                    child.GetComponent<SpawnItem>().SpawnDroppedItem();
+                    GameObject.Destroy(child.gameObject);
+                    inventory.isFull[selectedSlot] = false;
+                }
             }
-
         }
-        foreach (Transform child in transform)
+        else
         {
-            child.GetComponent<SpawnItem>().SpawnDroppedItem();
-            GameObject.Destroy(child.gameObject);
-            inventory.isFull[selectedSlot] = false;
+            foreach (Transform child in transform)
+            {
+                string type = child.GetComponent<SpawnItem>().type;
+                if (type == "amulet")
+                {
+                    child.GetComponent<Amulet>().DisableBuff();
+                }
+                print(child);
+                child.GetComponent<SpawnItem>().SpawnDroppedItem();
+                GameObject.Destroy(child.gameObject);
+                inventory.isFull[selectedSlot] = false;
+            }
         }
+        
         //inventory.GetTextInfo(selectedSlot);
     }
     public string GetInfo()
@@ -45,6 +65,7 @@ public class Slot : MonoBehaviour
     //предмет из 0-6 в 7
     public void PutOnItem(int selectedSlot)
     {
+        print("зашли в пут итем");
         string type = "";
         foreach (Transform child in transform)
         {
@@ -52,32 +73,46 @@ public class Slot : MonoBehaviour
         }
         if (type == "amulet")
         {
+            print("Амулет");
+
             if (inventory.isFull[7] == false)
             {
+                print("7 слот не занят");
+
                 foreach (Transform child in transform)
                 {
-                    if (child.CompareTag("BAmulet"))
-                    {
-                        Instantiate(child, inventory.slots[7].transform, false);
-                        AmuletBuff.SetBuff(0, 0.1f, 1);
-                        inventory.isFull[selectedSlot] = false;
-                        inventory.isFull[7] = true;
-                    }
-                    if (child.CompareTag("GAmulet"))
-                    {
-                        Instantiate(child, inventory.slots[7].transform, false);
-                        AmuletBuff.SetBuff(0.1f, 0, 1);
-                        inventory.isFull[selectedSlot] = false;
-                        inventory.isFull[7] = true;
-                    }
-                    if (child.CompareTag("YAmulet"))
-                    {
-                        Instantiate(child, inventory.slots[7].transform, false);
-                        AmuletBuff.SetBuff(0, 0, 0.91f);
-                        inventory.isFull[selectedSlot] = false;
-                        inventory.isFull[7] = true;
-                    }
+                    print($"тут что то должно быть {child.GetComponent<Amulet>()}");
+                    child.GetComponent<Amulet>().ApplyBuff();
+                    Instantiate(child, inventory.slots[7].transform, false);
                 }
+                inventory.isFull[selectedSlot] = false;
+                inventory.isFull[7] = true;
+
+                //foreach (Transform child in transform)
+                //{
+                //    if (child.CompareTag("BAmulet"))
+                //    {
+                //        Instantiate(child, inventory.slots[7].transform, false);
+                //        AmuletBuff.SetBuff(0, 0.1f, 1);
+                //        inventory.isFull[selectedSlot] = false;
+                //        inventory.isFull[7] = true;
+                //    }
+                //    if (child.CompareTag("GAmulet"))
+                //    {
+                //        Instantiate(child, inventory.slots[7].transform, false);
+                //        AmuletBuff.SetBuff(0.1f, 0, 1);
+                //        inventory.isFull[selectedSlot] = false;
+                //        inventory.isFull[7] = true;
+                //    }
+                //    if (child.CompareTag("YAmulet"))
+                //    {
+                //        Instantiate(child, inventory.slots[7].transform, false);
+                //        AmuletBuff.SetBuff(0, 0, 0.91f);
+                //        inventory.isFull[selectedSlot] = false;
+                //        inventory.isFull[7] = true;
+                //    }
+                //}
+
                 foreach (Transform child in transform)
                 {
                     GameObject.Destroy(child.gameObject);
@@ -92,19 +127,27 @@ public class Slot : MonoBehaviour
 
     public void PutOutItem(int selectedSlot)
     {
+        print("начинаем выкидывать");
         for (int i = 0; i < inventory.slots.Length - 1; i++)
         {
+            print("бежим по всеему инвентарю");
+
             if (inventory.isFull[i] == false)
             {
+                print("встретили пустую ячейку");
+
                 //добавляем
-                inventory.isFull[i] = true;
+                
                 foreach (Transform child in transform)
                 {
+                    print(child);
+                    child.GetComponent<Amulet>().DisableBuff();
                     Instantiate(child, inventory.slots[i].transform, false);
                     GameObject.Destroy(child.gameObject);
                 }
                 inventory.isFull[selectedSlot] = false;
-                AmuletBuff.SetBuff(0, 0, 1);
+                inventory.isFull[i] = true;
+                //AmuletBuff.SetBuff(0, 0, 1);
 
                 break;
             }
@@ -115,54 +158,27 @@ public class Slot : MonoBehaviour
     {
         if (selectedSlot != 7)
         {
-
+            //с 7 перемещаем в буфер, 
+            //основу перемещаем в 7
+            //с буфера в начальній
             foreach (Transform child in inventory.slots[7].transform)
             {
+                child.GetComponent<Amulet>().DisableBuff();
                 Instantiate(child, temporarySlot, false);
                 GameObject.Destroy(child.gameObject);
             }
 
             foreach (Transform child in transform)
             {
-                if (child.CompareTag("BAmulet"))
-                {
-                    Instantiate(child, inventory.slots[7].transform, false);
-                    GameObject.Destroy(child.gameObject);
-                    AmuletBuff.SetBuff(0, 0.1f, 1);
-                }
-                if (child.CompareTag("GAmulet"))
-                {
-                    Instantiate(child, inventory.slots[7].transform, false);
-                    GameObject.Destroy(child.gameObject);
-                    AmuletBuff.SetBuff(0.1f, 0, 1);
-                }
-                if (child.CompareTag("YAmulet"))
-                {
-                    Instantiate(child, inventory.slots[7].transform, false);
-                    GameObject.Destroy(child.gameObject);
-                    AmuletBuff.SetBuff(0, 0, 0.91f);
-                }
+                Instantiate(child, inventory.slots[7].transform, false);
+                child.GetComponent<Amulet>().ApplyBuff();
+                GameObject.Destroy(child.gameObject);
             }
-
-
 
             foreach (Transform child in temporarySlot)
             {
-                if (child.CompareTag("BAmulet"))
-                {
-                    Instantiate(child, transform, false);
-                    GameObject.Destroy(child.gameObject);
-                }
-                if (child.CompareTag("GAmulet"))
-                {
-                    Instantiate(child, transform, false);
-                    GameObject.Destroy(child.gameObject);
-                }
-                if (child.CompareTag("YAmulet"))
-                {
-                    Instantiate(child, transform, false);
-                    GameObject.Destroy(child.gameObject);
-                }
+                Instantiate(child, transform, false);
+                GameObject.Destroy(child.gameObject);
             }
         }
     }

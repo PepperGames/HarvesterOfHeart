@@ -322,32 +322,32 @@ public class Player : MonoBehaviour
                 CenterAnim.SetInteger("state", 0);
 
         }
-        //хп
-        if (timeForScroll > 0f)
-        {
-            timeForScroll -= Time.deltaTime;
-            CenterAnim.SetInteger("state", 3);
-            if (!isPlayedScroll)
-            {
-                //audioSource.clip = clips[1];
-                //print(audioSource.clip);
-                //audioSource.Play();
-                //isPlayedScroll = true;
-            }
-        }
-        else
-        {
-            currentDamageRatio = currentMaxDamageRatio;
-            if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
-                CenterAnim.SetInteger("state", 0);
-        }
-        if (!isPlayedHP)
-        {
-            //audioSource.clip = clips[0];
-            //print(audioSource.clip);
-            //audioSource.Play();
-            //isPlayedHP = true;
-        }
+        ////хп
+        //if (timeForScroll > 0f)
+        //{
+        //    timeForScroll -= Time.deltaTime;
+        //    CenterAnim.SetInteger("state", 3);
+        //    if (!isPlayedScroll)
+        //    {
+        //        //audioSource.clip = clips[1];
+        //        //print(audioSource.clip);
+        //        //audioSource.Play();
+        //        //isPlayedScroll = true;
+        //    }
+        //}
+        //else
+        //{
+        //    currentDamageRatio = currentMaxDamageRatio;
+        //    if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
+        //        CenterAnim.SetInteger("state", 0);
+        //}
+        //if (!isPlayedHP)
+        //{
+        //    //audioSource.clip = clips[0];
+        //    //print(audioSource.clip);
+        //    //audioSource.Play();
+        //    //isPlayedHP = true;
+        //}
     }
     private void OnDrawGizmosSelected()
     {
@@ -436,25 +436,38 @@ public class Player : MonoBehaviour
     {
         currentMaxDamage = MaxDamage * (1 + damaheBuff);
     }
-    public void LvlDamageUp()
+    //public void LvlDamageUp()
+    //{
+    //    {
+    //        bool Is = false;
+    //        if (currentMaxDamage > MaxDamage)
+    //            Is = true;
+    //        MaxDamage = 2 * LevelGenerator.LVL;
+    //        currentMaxDamage = MaxDamage;
+    //        //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
+    //        if (Is)
+    //        {
+    //            AmuletBuff.SetBuff(0, 0.1f, 1);
+    //        }
+    //    }
+    //}
+    public void LvlUp()
     {
+        MaxDamage = 2 * LevelGenerator.LVL;
+        maxHP = 16 * LevelGenerator.LVL;
+        //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
+        //пошаманить потом
+        currentMaxHP = maxHP;
+        currentHP += 16f;
+        if (currentHP > currentMaxHP)
         {
-            bool Is = false;
-            if (currentMaxDamage > MaxDamage)
-                Is = true;
-            MaxDamage = 2 * LevelGenerator.LVL;
-            currentMaxDamage = MaxDamage;
-            //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
-            if (Is)
-            {
-                AmuletBuff.SetBuff(0, 0.1f, 1);
-            }
+            currentHP = currentMaxHP;
         }
+        DisplayHP();
     }
-
     public void Attack1()
     {
-        print(audioSources[0].clip);
+        //print(audioSources[0].clip);
         audioSources[0].Play();
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
         for (int i = 0; i < enemiesToDamage.Length; i++)
@@ -747,26 +760,26 @@ public class Player : MonoBehaviour
 
     }
 
-    public void LvlHPUp()
-    {
-        bool Is = false;
-        if (currentMaxHP > maxHP)
-            Is = true;
-        maxHP = 16 * LevelGenerator.LVL;
-        //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
-        //пошаманить потом
-        currentMaxHP = maxHP;
-        if (Is)
-        {
-            AmuletBuff.SetBuff(0.1f, 0, 1f);
-        }
-        currentHP += 12f;
-        if (currentHP > currentMaxHP)
-        {
-            currentHP = currentMaxHP;
-        }
-        DisplayHP();
-    }
+    //public void LvlHPUp()
+    //{
+    //    bool Is = false;
+    //    if (currentMaxHP > maxHP)
+    //        Is = true;
+    //    maxHP = 16 * LevelGenerator.LVL;
+    //    //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
+    //    //пошаманить потом
+    //    currentMaxHP = maxHP;
+    //    if (Is)
+    //    {
+    //        AmuletBuff.SetBuff(0.1f, 0, 1f);
+    //    }
+    //    currentHP += 12f;
+    //    if (currentHP > currentMaxHP)
+    //    {
+    //        currentHP = currentMaxHP;
+    //    }
+    //    DisplayHP();
+    //}
 
     public void HPBuff(float hpBuff)
     {

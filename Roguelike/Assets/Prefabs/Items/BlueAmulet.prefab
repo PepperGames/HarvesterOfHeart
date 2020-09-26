@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 3753597502946793874}
   - component: {fileID: 2537070708816223500}
   - component: {fileID: 7092229473042076162}
-  - component: {fileID: -172193401601105778}
   - component: {fileID: 1941784752754604171}
   - component: {fileID: -7751743506534762756}
   - component: {fileID: 3192925556046863036}
   - component: {fileID: -8769740117025903344}
+  - component: {fileID: -7162216602769677330}
   m_Layer: 5
   m_Name: BlueAmulet
   m_TagString: BAmulet
@@ -165,18 +165,6 @@ MonoBehaviour:
   type: amulet
   clips:
   - {fileID: 8300000, guid: 8bb1421fd78988949b336977297d3860, type: 3}
---- !u!114 &-172193401601105778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2537070708816223498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d5058774316b44cbdc668b0bb65e74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1941784752754604171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,3 +350,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7162216602769677330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537070708816223498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54286d43b4c0a0e43ab025257358cd34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  target: {fileID: 0}
+  blueAmuletBuff: {fileID: 0}
