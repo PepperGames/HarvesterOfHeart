@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BigWomenBeam : MonoBehaviour
 {
-    private Player player;
+    public Player player;
     public float damage;
     public float timeToDestroy;
     private float timeBtwDamage;
@@ -13,7 +13,7 @@ public class BigWomenBeam : MonoBehaviour
     public AudioSource audioSource;
     void Start()
     {
-        damage = 5 * LevelGenerator.LVL;
+        damage = 6f * LevelGenerator.LVL;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         timeBtwDamage = timeToDestroy;
         float r = Random.Range(0, 2);
@@ -53,6 +53,6 @@ public class BigWomenBeam : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D other)
     {
-        player.TakingDamage((damage * Time.deltaTime * 0.58f) / timeBtwDamage);
+        player.TakingDamage((damage * Time.deltaTime));
     }
 }

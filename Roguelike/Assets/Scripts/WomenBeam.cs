@@ -15,7 +15,7 @@ public class WomenBeam : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        damage = 5 * LevelGenerator.LVL;
+        damage = 12 * LevelGenerator.LVL;
 
         print(audioSource.clip);
         audioSource.Play();

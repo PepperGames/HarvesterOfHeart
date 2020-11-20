@@ -11,7 +11,7 @@ public class WomenBeamSplash : MonoBehaviour
     public AudioSource audioSource;
     void Start()
     {
-        damage = 5 * LevelGenerator.LVL;
+        damage = 12 * LevelGenerator.LVL;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         timeBtwDamage = timeToDestroy;
 

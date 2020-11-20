@@ -349,7 +349,7 @@ public class Enemy : Person
         if (PlayerToDamage != null)
         {
             print(PlayerToDamage);
-                player.TakingDamage(damage);
+                player.TakingDamage(damage/1.3f);
                 timeBtwAttac = startTimeBtwAttac;
         }
         

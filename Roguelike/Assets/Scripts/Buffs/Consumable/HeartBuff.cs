@@ -15,7 +15,7 @@ public class HeartBuff : Buff
         audioSource.clip = audioClip;
         audioSource.Play();
         buffPosition.GetComponent<Animator>().SetInteger("state", 1);
-        target.currentHP += target.maxHP * 0.05f;
+        target.currentHP += target.maxHP * 0.25f;
         if (target.currentHP > target.currentMaxHP)
         {
             target.currentHP = target.currentMaxHP;

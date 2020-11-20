@@ -74,7 +74,7 @@ public class Boss2Enemy : Person
             {
                 if (timeBtwPowerAttacShoot <= 0)
                 {
-                    print(audioSources[0].clip);
+                    //print(audioSources[0].clip);
                     audioSources[0].Play();
                     anim.SetInteger("state", 2);
                 }

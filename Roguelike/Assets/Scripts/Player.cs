@@ -101,10 +101,10 @@ public class Player : Person
         anim = GetComponent<Animator>();
         state = State.Normal;
         //хп
-        maxHP = 12f;
-        currentHP = currentMaxHP = maxHP;
+        maxHP = 16f;
+        currentHP  = maxHP;
+        currentMaxHP = maxHP;
         maxDamageRatio = currentMaxDamageRatio = currentDamageRatio = 1;
-        DisplayHP();
         color1 = new Color(255, 255, 255, 1f);
         color2 = new Color(255, 255, 255, 0f);
         fillImage.color = color1;
@@ -112,6 +112,7 @@ public class Player : Person
         CenterAnim = Center.GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         isRed = false;
+        DisplayHP();
     }
 
     void Update()
@@ -433,12 +434,12 @@ public class Player : Person
     public void LvlUp()
     {
         MaxDamage = 2 * LevelGenerator.LVL;
-        maxHP = 16 * LevelGenerator.LVL;
+        maxHP = 14 * LevelGenerator.LVL;
         //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
         //пошаманить потом
         currentMaxHP = maxHP;
-        currentHP += 16f;
-        currentMaxDamage = MaxDamage;
+        currentHP += 14f;
+        currentDamage = currentMaxDamage = MaxDamage;
         if (currentHP > currentMaxHP)
         {
             currentHP = currentMaxHP;
@@ -454,7 +455,7 @@ public class Player : Person
         {
             if (enemiesToDamage[i].GetComponent<Person>() != null)
             {
-                enemiesToDamage[i].GetComponent<Person>().TakingDamage(currentDamage);
+                enemiesToDamage[i].GetComponent<Person>().TakingDamage(currentDamage*2);
             }
         }
     }
@@ -533,10 +534,11 @@ public class Player : Person
     //хп
     public override void TakingDamage(float damage)
     {
+        float takingDamage = damage / 1.75f;
         print(attackable);
         if (attackable)
         {
-            currentHP = currentHP - damage * currentDamageRatio;
+            currentHP = currentHP - takingDamage * currentDamageRatio;
             DisplayHP();
             isRed = true;
             print(isRed);
@@ -682,46 +684,30 @@ public class Player : Person
     {
         float HPSlider = currentHP / currentMaxHP;
 
-        if (HPSlider < 100)
-        {
-            if (HPSlider > 0.51f && HPSlider < 0.90f)
-            {
-                slider.value = HPSlider * 0.7f;
-            }
-            else if (HPSlider > 0.11f && HPSlider < 0.50f)
-            {
-                slider.value = HPSlider * 0.6f;
-            }
-            else if (HPSlider > 0.2f && HPSlider < 0.10f)
-            {
-                slider.value = HPSlider * 0.5f;
-            }
-            else
-            {
-                slider.value = HPSlider;
-            }
-        }
-        else
-        {
-            slider.value = HPSlider;
-        }
-
-        //if(HPSlider > 0.10f)
+        //if (HPSlider < 1)
         //{
-        //    //fillImage.color = color1;
-        //    slider.value = HPSlider;
-        //}
-
-        //else if (HPSlider <= 0.10f)
-        //{
-        //    if (HPSlider < 0.05f)
+        //    if (HPSlider > 0.51f && HPSlider < 0.90f)
         //    {
-        //        slider.value = HPSlider;
+        //        slider.value = HPSlider * 0.7f;
         //    }
-        //    else slider.value = 0.05f;
+        //    else if (HPSlider > 0.21f && HPSlider < 0.50f)
+        //    {
+        //        slider.value = HPSlider * 0.6f;
+        //    }
+        //    else if (HPSlider > 0.2f && HPSlider < 0.10f)
+        //    {
+        //        slider.value = HPSlider * 0.5f;
+        //    }
+        //    else
+        //    {
+        //        slider.value = HPSlider * 0.4f;
+        //    }
         //}
-
-
+        //else
+        //{
+            slider.value = HPSlider;
+        //}
+              
     }
 
     //public void LvlHPUp()
