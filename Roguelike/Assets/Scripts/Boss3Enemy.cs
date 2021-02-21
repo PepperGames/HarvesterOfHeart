@@ -21,8 +21,7 @@ public class Boss3Enemy : Person
     private float damage;
     public LayerMask whatIsEnemies;
     //хп гг
-    private Player player;
-    private bool isImpulse = false;
+    //private bool isImpulse = false;
     //простая атака
     public float startTimeBtwAttac;
     public float timeBtwAttac = 0;
@@ -54,7 +53,6 @@ public class Boss3Enemy : Person
             isMoving = true;
         }
         damage = 3 * LevelGenerator.LVL;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         maxHP = currentHP = 40 * (LevelGenerator.LVL + LevelGenerator.LVL / 3);
         speed = Random.Range(1f, 3f);
         DisplayHP();
@@ -175,7 +173,6 @@ public class Boss3Enemy : Person
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (Vector2.Distance(splashAttackPositiont.transform.position, player.transform.position) < 2.5)
             player.transform.Translate(new Vector2(player.transform.position.x - splashAttackPositiont.transform.position.x, player.transform.position.y - splashAttackPositiont.transform.position.y) * 7 * Time.deltaTime);
-        //Instantiate(womenBeamSplash, new Vector3(attackPositiont.transform.position.x, splashAttackPositiont.transform.position.y, -95), Quaternion.identity);
     }
 
     private void DisplayHP()

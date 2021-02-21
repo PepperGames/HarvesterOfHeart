@@ -47,8 +47,8 @@ public class Player : Person
 
     private Inventory inventory;
     private float timeBtwAttac = 0;
-    private float timeBtwAttacForAttack2 = 0;
-    int attackCount = 0;
+    //private float timeBtwAttacForAttack2 = 0;
+    //private int attackCount = 0;
 
     private Camera cam;
 
@@ -56,7 +56,7 @@ public class Player : Person
 
     public GameObject Center;
     private Animator CenterAnim;
-    private bool isPlayed = false;
+    //private bool isPlayed = false;
 
     //хп
     public float maxHP;//максимальное хп без шмотки
@@ -80,8 +80,7 @@ public class Player : Person
     public bool attackable;
 
     private float redVariable;
-    private bool isPlayedHP = false;
-    private bool isPlayedScroll = false;
+    //private bool isPlayedHP = false;
 
     public AudioSource[] audioSources;
 
@@ -300,34 +299,6 @@ public class Player : Person
 
                 break;
         }
-
-        
-        ////хп
-        //if (timeForScroll > 0f)
-        //{
-        //    timeForScroll -= Time.deltaTime;
-        //    CenterAnim.SetInteger("state", 3);
-        //    if (!isPlayedScroll)
-        //    {
-        //        //audioSource.clip = clips[1];
-        //        //print(audioSource.clip);
-        //        //audioSource.Play();
-        //        //isPlayedScroll = true;
-        //    }
-        //}
-        //else
-        //{
-        //    currentDamageRatio = currentMaxDamageRatio;
-        //    if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
-        //        CenterAnim.SetInteger("state", 0);
-        //}
-        //if (!isPlayedHP)
-        //{
-        //    //audioSource.clip = clips[0];
-        //    //print(audioSource.clip);
-        //    //audioSource.Play();
-        //    //isPlayedHP = true;
-        //}
     }
     private void OnDrawGizmosSelected()
     {
@@ -335,108 +306,15 @@ public class Player : Person
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 
-    //public void UseScroll()
-    //{
-    //    for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
-    //    {
-    //        if (inventory.slots[i].transform.childCount > 0)
-    //        {
-    //            if (inventory.slots[i].transform.GetChild(0).CompareTag("Scroll"))
-    //            {
-    //                currentDamage = currentMaxDamage * 1.25f;
-    //                timeForScroll = 15f;
-    //                inventory.isFull[i] = false;
-    //                foreach (Transform t in inventory.slots[i].transform)
-    //                {
-    //                    Destroy(t.gameObject);
-    //                }
-    //                break;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            continue;
-    //        }
-
-    //    }
-    ////}
-    //public void UseSoul()
-    //{
-    //    if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
-    //    {
-    //        for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
-    //        {
-    //            if (inventory.slots[i].transform.childCount > 0)
-    //            {
-    //                if (inventory.slots[i].transform.GetChild(0).CompareTag("Soul"))
-    //                {
-    //                    currentDamage = currentMaxDamage * 1.25f;
-    //                    timeForSoul = 15f;
-    //                    CenterAnim.SetInteger("state", 2);
-    //                    inventory.isFull[i] = false;
-    //                    isPlayed = false;
-    //                    foreach (Transform t in inventory.slots[i].transform)
-    //                    {
-    //                        Destroy(t.gameObject);
-    //                    }
-    //                    break;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                continue;
-    //            }
-
-    //        }
-    //    }
-    //}
-    //public void UseSoul(int selSlot)
-    //{
-    //    if (timeForSoul <= 0 && GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().timeForScroll <= 0)
-    //    {
-    //        if (inventory.slots[selSlot].transform.childCount > 0)
-    //        {
-    //            if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("Soul"))
-    //            {
-    //                currentDamage = currentMaxDamage * 1.25f;
-    //                timeForSoul = 15f;
-    //                CenterAnim.SetInteger("state", 2);
-    //                inventory.isFull[selSlot] = false;
-    //                isPlayed = false;
-    //                foreach (Transform t in inventory.slots[selSlot].transform)
-    //                {
-    //                    Destroy(t.gameObject);
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
     public void DamageBuff(float damaheBuff)
     {
         currentMaxDamage = MaxDamage * (1 + damaheBuff);
     }
-    //public void LvlDamageUp()
-    //{
-    //    {
-    //        bool Is = false;
-    //        if (currentMaxDamage > MaxDamage)
-    //            Is = true;
-    //        MaxDamage = 2 * LevelGenerator.LVL;
-    //        currentMaxDamage = MaxDamage;
-    //        //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
-    //        if (Is)
-    //        {
-    //            AmuletBuff.SetBuff(0, 0.1f, 1);
-    //        }
-    //    }
-    //}
+    
     public void LvlUp()
     {
         MaxDamage = 2 * LevelGenerator.LVL;
         maxHP = 14 * LevelGenerator.LVL;
-        //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
-        //пошаманить потом
         currentMaxHP = maxHP;
         currentHP += 14f;
         currentDamage = currentMaxDamage = MaxDamage;
@@ -510,8 +388,6 @@ public class Player : Person
         }
         else return 1;
     }
-    //Screen.width / 2 - Input.mousePosition.x и Screen.height / 2 - Input.mousePosition.y
-
 
     void OnGUI()
     {
@@ -535,150 +411,18 @@ public class Player : Person
     public override void TakingDamage(float damage)
     {
         float takingDamage = damage / 1.75f;
-        print(attackable);
         if (attackable)
         {
             currentHP = currentHP - takingDamage * currentDamageRatio;
             DisplayHP();
             isRed = true;
-            print(isRed);
             redVariable = 1.5f;
-            print(redVariable);
             if (currentHP <= 0)
             {
                 SceneManager.LoadScene("OnLoseScene");
             }
         }
     }
-
-    //восполнение хп
-    //public void UseHPPotion()
-    //{
-    //    for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
-    //    {
-    //        if (inventory.slots[i].transform.childCount > 0)
-    //        {
-    //            if (inventory.slots[i].transform.GetChild(0).CompareTag("HealthPotion"))
-    //            {
-    //                currentHP += maxHP * 0.05f;
-    //                CenterAnim.SetInteger("state", 1);
-    //                if (currentHP > currentMaxHP)
-    //                {
-    //                    currentHP = currentMaxHP;
-    //                }
-    //                isPlayedHP = false;
-    //                DisplayHP();
-    //                inventory.isFull[i] = false;
-    //                foreach (Transform t in inventory.slots[i].transform)
-    //                {
-    //                    Destroy(t.gameObject);
-    //                }
-    //                break;
-    //            }
-
-    //        }
-    //        else
-    //        {
-    //            continue;
-    //        }
-
-    //    }
-    //    DisplayHP();
-    //}
-    //public void UseHPPotion(int selSlot)
-    //{
-    //    if (inventory.slots[selSlot].transform.childCount > 0)
-    //    {
-    //        if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("HealthPotion"))
-    //        {
-    //            currentHP += maxHP * 0.05f;
-    //            CenterAnim.SetInteger("state", 1);
-    //            if (currentHP > currentMaxHP)
-    //            {
-    //                currentHP = currentMaxHP;
-    //            }
-    //            isPlayedHP = false;
-    //            DisplayHP();
-    //            inventory.isFull[selSlot] = false;
-    //            foreach (Transform t in inventory.slots[selSlot].transform)
-    //            {
-    //                Destroy(t.gameObject);
-    //            }
-    //        }
-    //    }
-    //    DisplayHP();
-    //}
-    //public void UseHPPotionOnButton()
-    //{
-    //    GameObject parent = transform.parent.gameObject;
-    //    if (parent.CompareTag("Slot"))
-    //    {
-    //        int n = parent.GetComponent<Slot>().number;
-    //        UseHPPotion();
-    //        inventory.isFull[n] = false;
-    //        foreach (Transform t in inventory.slots[n].transform)
-    //        {
-    //            Destroy(t.gameObject);
-    //        }
-    //    }
-
-
-    //    DisplayHP();
-    //}
-
-    //public void UseScroll()
-    //{
-    //    if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
-    //    {
-    //        for (int i = 0; i < inventory.slots.Length; i++) //inventory.slots.Length
-    //        {
-    //            if (inventory.slots[i].transform.childCount > 0)
-    //            {
-    //                if (inventory.slots[i].transform.GetChild(0).CompareTag("Scroll"))
-    //                {
-    //                    currentDamageRatio = currentMaxDamageRatio * 0.75f;
-    //                    timeForScroll = 15f;
-    //                    CenterAnim.SetInteger("state", 3);
-    //                    inventory.isFull[i] = false;
-    //                    isPlayedScroll = false;
-    //                    foreach (Transform t in inventory.slots[i].transform)
-    //                    {
-    //                        Destroy(t.gameObject);
-    //                    }
-    //                    break;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                continue;
-    //            }
-
-    //        }
-    //    }
-    //}
-
-    //public void UseScroll(int selSlot)
-    //{
-    //    if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>().timeForSoul <= 0 && timeForScroll <= 0)
-    //    {
-    //        if (inventory.slots[selSlot].transform.childCount > 0)
-    //        {
-    //            if (inventory.slots[selSlot].transform.GetChild(0).CompareTag("Scroll"))
-    //            {
-    //                currentDamageRatio = currentMaxDamageRatio * 0.75f;
-    //                timeForScroll = 15f;
-    //                CenterAnim.SetInteger("state", 3);
-    //                isPlayedScroll = false;
-    //                inventory.isFull[selSlot] = false;
-    //                foreach (Transform t in inventory.slots[selSlot].transform)
-    //                {
-    //                    Destroy(t.gameObject);
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
 
     public void DisplayHP()
     {
@@ -709,27 +453,6 @@ public class Player : Person
         //}
               
     }
-
-    //public void LvlHPUp()
-    //{
-    //    bool Is = false;
-    //    if (currentMaxHP > maxHP)
-    //        Is = true;
-    //    maxHP = 16 * LevelGenerator.LVL;
-    //    //тут еще что то нужно, типо когда на некст лвл переход, и есть активная шмотка, то и карентМакс нужно увеличить
-    //    //пошаманить потом
-    //    currentMaxHP = maxHP;
-    //    if (Is)
-    //    {
-    //        AmuletBuff.SetBuff(0.1f, 0, 1f);
-    //    }
-    //    currentHP += 12f;
-    //    if (currentHP > currentMaxHP)
-    //    {
-    //        currentHP = currentMaxHP;
-    //    }
-    //    DisplayHP();
-    //}
 
     public void HPBuff(float hpBuff)
     {

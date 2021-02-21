@@ -24,6 +24,7 @@ TagManager:
   - YAmulet
   - Menoreh
   - Slot
+  - MIniMap
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - Enemy
   - Player
   - Menorah
-  - 
+  - MIniMap
   - 
   - 
   - 
