@@ -9,7 +9,7 @@ public class AnalyticsComponent : MonoBehaviour
     {
         Analytics.CustomEvent("Player Dead", new Dictionary<string, object>()
         {
-            { "potions", level },
+            { "Level Number", level },
         });
     }
 }
