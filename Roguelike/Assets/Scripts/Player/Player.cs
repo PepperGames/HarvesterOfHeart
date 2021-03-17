@@ -80,11 +80,14 @@ public class Player : Person
     public bool attackable;
 
     private float redVariable;
-    //private bool isPlayedHP = false;
 
     public AudioSource[] audioSources;
 
     private List<Buff> buffs = new List<Buff>();
+
+    [SerializeField]
+    private AnalyticsComponent analytics;
+
     private void Start()
     {
         //атака
@@ -362,11 +365,12 @@ public class Player : Person
     //    attackCount = 0;
     //    timeBtwAttacForAttack2 = 0;
     //}
+
     private byte CalculateAngle()
     {
         Vector2 playerPos = transform.position;
 
-        Vector2 dir = playerPos - (Vector2)mousePoint;
+        Vector2 dir = playerPos - mousePoint;
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
@@ -419,39 +423,22 @@ public class Player : Person
             redVariable = 1.5f;
             if (currentHP <= 0)
             {
-                SceneManager.LoadScene("OnLoseScene");
+                Dead();
             }
         }
+    }
+
+    private void Dead()
+    {
+        analytics.OnPlayerDead((int)LevelGenerator.LVL);
+        SceneManager.LoadScene("OnLoseScene");
     }
 
     public void DisplayHP()
     {
         float HPSlider = currentHP / currentMaxHP;
 
-        //if (HPSlider < 1)
-        //{
-        //    if (HPSlider > 0.51f && HPSlider < 0.90f)
-        //    {
-        //        slider.value = HPSlider * 0.7f;
-        //    }
-        //    else if (HPSlider > 0.21f && HPSlider < 0.50f)
-        //    {
-        //        slider.value = HPSlider * 0.6f;
-        //    }
-        //    else if (HPSlider > 0.2f && HPSlider < 0.10f)
-        //    {
-        //        slider.value = HPSlider * 0.5f;
-        //    }
-        //    else
-        //    {
-        //        slider.value = HPSlider * 0.4f;
-        //    }
-        //}
-        //else
-        //{
-            slider.value = HPSlider;
-        //}
-              
+        slider.value = HPSlider;
     }
 
     public void HPBuff(float hpBuff)
@@ -459,6 +446,7 @@ public class Player : Person
         currentMaxHP = maxHP * (1 + hpBuff);
         DisplayHP();
     }
+
     public void RatioBuff(float ratioBuff)
     {
         currentMaxDamageRatio = maxDamageRatio * ratioBuff;
@@ -468,10 +456,12 @@ public class Player : Person
         }
         DisplayHP();
     }
+
     public void SetNonBuffAnimation()
     {
         CenterAnim.SetInteger("state", 0);
     }
+
     private void ChangeColor()
     {
         if (isRed)
@@ -498,6 +488,7 @@ public class Player : Person
         }
         return false;
     }
+
     private void HandleBuff()
     {
         foreach (Buff buff in buffs)
@@ -505,6 +496,7 @@ public class Player : Person
             buff.Update();
         }
     }
+
     public bool RemoveBuff(Buff buff)
     {
         if (buffs.Exists(x => x.GetType() == buff.GetType()))

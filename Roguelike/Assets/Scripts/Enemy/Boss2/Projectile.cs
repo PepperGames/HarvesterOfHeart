@@ -17,13 +17,13 @@ public class Projectile : MonoBehaviour
         Player = GameObject.FindWithTag("Player").transform.position;
         damage = 5 * LevelGenerator.LVL;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        //print(Player);
     }
 
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Player, speed * Time.deltaTime);
+        float step = speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, Player, step);
         if (transform.position == Player)
         {
             Destroy(gameObject);

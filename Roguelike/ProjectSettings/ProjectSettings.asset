@@ -644,10 +644,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 4e88d7bc-35c5-4fb0-a7a1-9df134615328
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Roguelike
+  organizationId: kiki8aru
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
