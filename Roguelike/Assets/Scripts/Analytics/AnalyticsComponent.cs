@@ -12,4 +12,20 @@ public class AnalyticsComponent : MonoBehaviour
             { "Level Number", level },
         });
     }
+
+    public void OnPlayerWin()
+    {
+        Analytics.CustomEvent("Player Win", new Dictionary<string, object>()
+        {
+            { "Level Number", "Win" },
+        });
+    }
+
+    public void OnLevelStart(int level)
+    {
+        Analytics.CustomEvent("Level Start", new Dictionary<string, object>()
+        {
+            { "Level Number", level },
+        });
+    }
 }

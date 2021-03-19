@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1987,6 +1987,7 @@ GameObject:
   - component: {fileID: 1995109384}
   - component: {fileID: 1995109386}
   - component: {fileID: 1995109387}
+  - component: {fileID: 1995109388}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: levelGenerator
@@ -2043,6 +2044,7 @@ MonoBehaviour:
     m_Bits: 8192
   audioSources:
   - {fileID: 1995109387}
+  analytics: {fileID: 1995109388}
 --- !u!4 &1995109385
 Transform:
   m_ObjectHideFlags: 0
@@ -2169,6 +2171,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1995109388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995109383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270a4bfa6e72b734dadc87c4ed984abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2017136802
 GameObject:
   m_ObjectHideFlags: 0

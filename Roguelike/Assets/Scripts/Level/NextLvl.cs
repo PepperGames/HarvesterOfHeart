@@ -10,6 +10,9 @@ public class NextLvl : MonoBehaviour
     public float w;
     public float h;
     public int count = 0;
+
+    [SerializeField]
+    private AnalyticsComponent analytics;
     void Update()
     {
         if (Input.GetKeyDown("f"))
@@ -40,7 +43,10 @@ public class NextLvl : MonoBehaviour
             levelGenerator.GetComponent<LevelGenerator>().RestartLVL();
 
             if(LevelGenerator.LVL >= 10)
+            {
+                analytics.OnPlayerWin();
                 SceneManager.LoadScene("OnWinScene");
+            }
 
             Destroy(gameObject);
         }

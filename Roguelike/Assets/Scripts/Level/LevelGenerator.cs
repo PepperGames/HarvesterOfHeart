@@ -48,9 +48,10 @@ public class LevelGenerator : MonoBehaviour
 
     public AudioSource[] audioSources;
 
+    [SerializeField]
+    private AnalyticsComponent analytics;
     public void Start()
     {
-
         RestartLVL();
         //print(audioSources[0].clip);
         audioSources[0].Play();
@@ -70,6 +71,7 @@ public class LevelGenerator : MonoBehaviour
             Restarter r = new Restarter();
             r.Restart();
         }
+        analytics.OnLevelStart((int)LVL);
         SpawnMob();
         SpawnMenorah();
     }
