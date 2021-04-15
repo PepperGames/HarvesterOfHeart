@@ -14,16 +14,17 @@ public class Projectile : MonoBehaviour
     public float smoothTime = 0.9F;
     void Start()
     {
-        Player = GameObject.FindWithTag("Player").transform.position;
+        GameObject _player = GameObject.FindWithTag("Player");
+        Player = _player.transform.position;
         damage = 5 * LevelGenerator.LVL;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = _player.GetComponent<Player>();
     }
 
 
     void Update()
     {
         float step = speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, Player, step);
+        transform.position = Vector3.MoveTowards(transform.position, Player, step);
         if (transform.position == Player)
         {
             Destroy(gameObject);

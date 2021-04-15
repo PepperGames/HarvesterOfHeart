@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 623056301914271521}
   - component: {fileID: 1112970487941555726}
   - component: {fileID: 9017488882882237626}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   speed: 8
+  smoothTime: 0.9
 --- !u!58 &9017488882882237626
 CircleCollider2D:
   m_ObjectHideFlags: 0
