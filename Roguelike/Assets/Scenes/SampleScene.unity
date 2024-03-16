@@ -2038,7 +2038,7 @@ MonoBehaviour:
     type: 3}
   menorahD: {fileID: 3343304373241061825, guid: 9b3fdfaae95fad44f823a09e312cd550,
     type: 3}
-  MenorahSpawnRange: 1.99
+  MenorahSpawnRange: 2
   whatIsMenorah:
     serializedVersion: 2
     m_Bits: 8192

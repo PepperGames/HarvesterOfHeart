@@ -74,7 +74,6 @@ public class Boss2Enemy : Person
             {
                 if (timeBtwPowerAttacShoot <= 0)
                 {
-                    //print(audioSources[0].clip);
                     audioSources[0].Play();
                     anim.SetInteger("state", 2);
                 }
@@ -193,7 +192,7 @@ public class Boss2Enemy : Person
 
     float DropAmuletChance(float k, float dropCount, float countDeadMobs)
     {
-        return ((k - dropCount) / (100 - countDeadMobs)) * 1.4f * (k - dropCount);
+        return ((k - dropCount) / (100 - countDeadMobs)) * 1.4f * (k - dropCount) * (k - dropCount);
     }
 
     private void DisplayHP()

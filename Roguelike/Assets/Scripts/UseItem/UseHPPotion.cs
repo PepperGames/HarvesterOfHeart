@@ -8,7 +8,6 @@ public class UseHPPotion : MonoBehaviour
     {
         int selectedSlot = gameObject.GetComponentInParent<Slot>().number;
         gameObject.GetComponent<Heart>().ApplyBuff();
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>().UseHPPotion(selectedSlot);
     }
     public void Drop()
     {

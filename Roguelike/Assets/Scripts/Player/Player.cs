@@ -346,26 +346,6 @@ public class Player : Person
         timeBtwAttac = startTimeBtwAttac;
     }
 
-
-    //public void CheckStartTimeBtwAttac2()
-    //{
-    //    if (timeBtwAttacForAttack2 <= startTimeBtwAttac + 1)
-    //    {
-    //        attackCount++;
-    //        timeBtwAttacForAttack2 = 0;
-    //    }
-    //    else
-    //    {
-    //        attackCount = 0;
-    //        timeBtwAttacForAttack2 = 0;
-    //    }
-    //}
-    //public void SetStartTimeBtwAttac2()
-    //{
-    //    attackCount = 0;
-    //    timeBtwAttacForAttack2 = 0;
-    //}
-
     private byte CalculateAngle()
     {
         Vector2 playerPos = transform.position;

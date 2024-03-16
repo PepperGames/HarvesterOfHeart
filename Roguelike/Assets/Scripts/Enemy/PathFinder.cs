@@ -51,14 +51,6 @@ public class PathFinder : MonoBehaviour
                     ChechedNodes.Add(nodeCheck);
                     WaitingNodes.AddRange(GetNeighbourNodes(nodeCheck));
                 }
-                //else
-                //{
-                //    var sameNode = ChechedNodes.Where(x => x.Position == nodeCheck.Position).ToList();
-                //    for (int i = 0; i < sameNode.Count; i++)
-                //    {
-                //        if(sameNode[i].F>nodeCheck.F)
-                //    }
-                //}
             }
         }
 
@@ -77,6 +69,7 @@ public class PathFinder : MonoBehaviour
         }
         return path;
     }
+
     List<Node> GetNeighbourNodes(Node node)
     {
         var Neighbour = new List<Node>();
@@ -97,27 +90,10 @@ public class PathFinder : MonoBehaviour
              node.Position.x, node.Position.y + 1),
              node.targetPosition,
              node));
-
-
-        //эксперимент
-        //Neighbour.Add(new Node(node.G + 1, new Vector2(
-        //    node.Position.x - 1, node.Position.y-1),
-        //    node.targetPosition,
-        //    node));
-        //Neighbour.Add(new Node(node.G + 1, new Vector2(
-        //     node.Position.x + 1, node.Position.y-1),
-        //     node.targetPosition,
-        //     node));
-        //Neighbour.Add(new Node(node.G + 1, new Vector2(
-        //     node.Position.x+1, node.Position.y + 1),
-        //     node.targetPosition,
-        //     node));
-        //Neighbour.Add(new Node(node.G + 1, new Vector2(
-        //     node.Position.x-1, node.Position.y + 1),
-        //     node.targetPosition,
-        //     node));
+        
         return Neighbour;
     }
+
     private void OnDrawGizmos()
     {
         foreach(var item in ChechedNodes)
@@ -157,5 +133,4 @@ public class Node
         H = (int)Mathf.Abs(targetPosition.x - Position.x) + (int)Mathf.Abs(targetPosition.y - Position.y);
         F = G + H;
     }
-
 }

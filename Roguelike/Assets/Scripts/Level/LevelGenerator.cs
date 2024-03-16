@@ -6,12 +6,11 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     public static float LVL = 1;
-    public enum gridSpace { empty, floor, wall, l, u, r, d, luc, ldc, ruc, rdc, rd, ru, ld, lu };//валк - просто стена, остально перечисление
-    //стороны стены которая касается с полом, если перед стоит n то это значит стенка, которая не касается пола в этой позиции
+    public enum gridSpace { empty, floor, wall, l, u, r, d, luc, ldc, ruc, rdc, rd, ru, ld, lu };
     public gridSpace[,] grid;
-    int roomHeight, roomWidth;
-    Vector2 roomSizeWorldUnits;
-    float worldUnitsInOneGridCell = 1;
+    private int roomHeight, roomWidth;
+    private Vector2 roomSizeWorldUnits;
+    private float worldUnitsInOneGridCell = 1;
       
     enum Mobs { mob1, boss1, boss2, boss3 };
     public GameObject portal, mob1, boss1, boss2, boss3;
@@ -19,30 +18,30 @@ public class LevelGenerator : MonoBehaviour
 
     public float distance;
     public int MobCountOnLvl;
-    int floorCount;
-    int mobCount;
-    int floorNumber;
+    private int floorCount;
+    private int mobCount;
+    private int floorNumber;
     public int[,] floorForSpawnMob;
     //для теста сколько полов
-    int floorC = 0;
+    private int floorC = 0;
     struct walker
     {
         public Vector2 dir;
         public Vector2 pos;
     }
     List<walker> walkers;
-    float chanceWalkerChangeDir = 0.5f, chanceWalkerSpawn = 0.05f;
-    float chanceWalkerDestoy = 0.05f;
-    int maxWalkers = 10;
-    float percentToFill = 0.2f;
+    private float chanceWalkerChangeDir = 0.5f, chanceWalkerSpawn = 0.05f;
+    private float chanceWalkerDestoy = 0.05f;
+    private int maxWalkers = 10;
+    private float percentToFill = 0.2f;
     public GameObject floor1, floor2, floor3, wall, l, u, r, d, luc, ldc, ruc, rdc, rd, ru, ld, lu, menorahL, menorahU, menorahR, menorahD;
 
     NormalGenerationCheck normalGenerationCheck;
     //вспомогательные массивы(словари)
-    public int[,] LwallForMenorah;
-    public int[,] UwallForMenorah;
-    public int[,] RwallForMenorah;
-    public int[,] DwallForMenorah;
+    private int[,] LwallForMenorah;
+    private int[,] UwallForMenorah;
+    private int[,] RwallForMenorah;
+    private int[,] DwallForMenorah;
     public float MenorahSpawnRange;
     public LayerMask whatIsMenorah;
 
@@ -53,7 +52,6 @@ public class LevelGenerator : MonoBehaviour
     public void Start()
     {
         RestartLVL();
-        //print(audioSources[0].clip);
         audioSources[0].Play();
     }
 
@@ -90,57 +88,55 @@ public class LevelGenerator : MonoBehaviour
             hw = 15;
         }
         roomSizeWorldUnits = new Vector2(hw, hw);
-        //find grid size
+
         roomHeight = Mathf.RoundToInt(roomSizeWorldUnits.x / worldUnitsInOneGridCell);
         roomWidth = Mathf.RoundToInt(roomSizeWorldUnits.y / worldUnitsInOneGridCell);
-        //create grid
+ 
         grid = new gridSpace[roomWidth, roomHeight];
-        //set grid's default state
+ 
         for (int x = 0; x < roomWidth - 1; x++)
         {
             for (int y = 0; y < roomHeight - 1; y++)
             {
-                //make every cell "empty"
                 grid[x, y] = gridSpace.empty;
             }
         }
-        //set first walker
-        //init list
+
         walkers = new List<walker>();
-        //create a walker 
+        //создать ходока
         walker newWalker = new walker();
         newWalker.dir = RandomDirection();
-        //find center of grid
+        //центр сетки
         Vector2 spawnPos = new Vector2(Mathf.RoundToInt(roomWidth / 2.0f),
                                         Mathf.RoundToInt(roomHeight / 2.0f));
         newWalker.pos = spawnPos;
-        //add walker to list
+
         walkers.Add(newWalker);
     }
     void CreateFloors()
     {
         if (LVL % 3 != 0)
         {
-            int iterations = 0;//loop will not run forever
+            int iterations = 0;//цикл не будет работать вечно
             do
             {
-                //create floor at position of every walker
+                //создать пол на каждом шагу
                 foreach (walker myWalker in walkers)
                 {
                     grid[(int)myWalker.pos.x, (int)myWalker.pos.y] = gridSpace.floor;
                 }
-                //chance: destroy walker
-                int numberChecks = walkers.Count; //might modify count while in this loop
+                //шанс: уничтожить ходока
+                int numberChecks = walkers.Count; //может изменить счетчик в этом цикле
                 for (int i = 0; i < numberChecks; i++)
                 {
-                    //only if its not the only one, and at a low chance
+                    //только если он не единственный и с малой вероятностью
                     if (Random.value < chanceWalkerDestoy && walkers.Count > 1)
                     {
                         walkers.RemoveAt(i);
-                        break; //only destroy one per iteration
+                        break; // уничтожить только одного за итерацию
                     }
                 }
-                //chance: walker pick new direction
+                //шанс: ходок выберет новое направление
                 for (int i = 0; i < walkers.Count; i++)
                 {
                     if (Random.value < chanceWalkerChangeDir)
@@ -150,37 +146,36 @@ public class LevelGenerator : MonoBehaviour
                         walkers[i] = thisWalker;
                     }
                 }
-                //chance: spawn new walker
-                numberChecks = walkers.Count; //might modify count while in this loop
+                //шанс: создать нового ходока
+                numberChecks = walkers.Count; //может изменить счетчик в этом цикле
                 for (int i = 0; i < numberChecks; i++)
                 {
-                    //only if # of walkers < max, and at a low chance
+                    // только если количество ходоков < макс, и с низким шансом
                     if (Random.value < chanceWalkerSpawn && walkers.Count < maxWalkers)
                     {
-                        //create a walker 
                         walker newWalker = new walker();
                         newWalker.dir = RandomDirection();
                         newWalker.pos = walkers[i].pos;
                         walkers.Add(newWalker);
                     }
                 }
-                //move walkers
+                //перемещать ходока
                 for (int i = 0; i < walkers.Count; i++)
                 {
                     walker thisWalker = walkers[i];
                     thisWalker.pos += thisWalker.dir;
                     walkers[i] = thisWalker;
                 }
-                //avoid boarder of grid
+                //избегать границы сетки
                 for (int i = 0; i < walkers.Count; i++)
                 {
                     walker thisWalker = walkers[i];
-                    //clamp x,y to leave a 1 space boarder: leave room for walls
+                    //clamp x, y, чтобы оставить границу 1 пробела: оставьте место для стен
                     thisWalker.pos.x = Mathf.Clamp(thisWalker.pos.x, 1, roomWidth - 2);
                     thisWalker.pos.y = Mathf.Clamp(thisWalker.pos.y, 1, roomHeight - 2);
                     walkers[i] = thisWalker;
                 }
-                //check to exit loop
+                //проверьте, чтобы выйти из цикла
                 if ((float)NumberOfFloors() / (float)grid.Length > percentToFill)
                 {
                     break;
@@ -241,21 +236,14 @@ public class LevelGenerator : MonoBehaviour
         {
             grid[x, y] = gridSpace.empty;
         }
-        //for (int x = 0, y = 0; x < roomWidth - 1; x++)
-        //{
-        //    grid[x, y + 1] = gridSpace.empty;
-        //}
-        //for (int x = 0, y = 0; x < roomWidth - 1; x++)
-        //{
-        //    grid[x, y + 1] = gridSpace.empty;
-        //}
 
-        //loop though every grid space
+
+        //пройти через каждую клетку сетки
         for (int x = 1; x < roomWidth - 1; x++)
         {
             for (int y = 1; y < roomHeight - 1; y++)
             {
-                //if theres a floor, check the spaces around it
+                //Если есть пол, проверьте пространство вокруг него
                 if (grid[x, y] == gridSpace.floor)
                 {
                     //стены лево\право, верх\низ
@@ -284,7 +272,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 1; y < roomHeight - 1; y++)
             {
-                //if theres a floor, check the spaces around it
+                //Если есть пол, проверьте пространство вокруг него
                 if (grid[x, y] == gridSpace.floor)
                 {
 
@@ -313,7 +301,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 1; y < roomHeight - 1; y++)
             {
-                //if theres a floor, check the spaces around it
+                //Если есть пол, проверить пространство вокруг него
                 if (grid[x, y] == gridSpace.wall)
                 {
                     if (grid[x - 1, y + 1] == gridSpace.empty || grid[x, y + 1] == gridSpace.empty ||
@@ -335,7 +323,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 1; y < roomHeight - 1; y++)
             {
-                //if theres a floor, check the spaces around it
+                //Если есть пол, проверьте пространство вокруг него
                 if (grid[x, y] == gridSpace.wall)
                 {
 
@@ -375,32 +363,7 @@ public class LevelGenerator : MonoBehaviour
                     {
                         grid[x, y] = gridSpace.rdc;
                     }
-                    ////лево\право верх\низ буквы там де полы
-                    //if (grid[x - 1, y] == gridSpace.floor && grid[x + 1, y] == gridSpace.floor && grid[x, y + 1] != gridSpace.floor && grid[x, y + 1] != gridSpace.empty && grid[x, y - 1] != gridSpace.floor && grid[x, y - 1] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.lr;
-                    //}
-                    //if (grid[x, y + 1] == gridSpace.floor && grid[x, y - 1] == gridSpace.floor && grid[x - 1, y] != gridSpace.floor && grid[x - 1, y] != gridSpace.empty && grid[x + 1, y] != gridSpace.floor && grid[x + 1, y] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.ud;
-                    //}
-                    ////стенки, окруженные полами с 3 сторон буквы с тех сторон где пол
-                    //if (grid[x + 1, y] == gridSpace.floor && grid[x - 1, y] == gridSpace.floor && grid[x, y - 1] == gridSpace.floor && grid[x, y + 1] != gridSpace.floor && grid[x, y + 1] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.ldr;
-                    //}
-                    //if (grid[x + 1, y] == gridSpace.floor && grid[x - 1, y] == gridSpace.floor && grid[x, y + 1] == gridSpace.floor && grid[x, y - 1] != gridSpace.floor && grid[x, y - 1] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.lur;
-                    //}
-                    //if (grid[x - 1, y] == gridSpace.floor && grid[x, y + 1] == gridSpace.floor && grid[x, y - 1] == gridSpace.floor && grid[x + 1, y] != gridSpace.floor && grid[x + 1, y] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.uld;
-                    //}
-                    //if (grid[x + 1, y] == gridSpace.floor && grid[x, y + 1] == gridSpace.floor && grid[x, y - 1] == gridSpace.floor && grid[x - 1, y] != gridSpace.floor && grid[x - 1, y] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.urd;
-                    //}
+                    
                     //внутренние углы буквы - где полы
                     if (grid[x - 1, y] == gridSpace.floor && grid[x, y - 1] == gridSpace.floor && grid[x + 1, y] != gridSpace.empty && grid[x + 1, y] != gridSpace.floor && grid[x, y + 1] != gridSpace.empty && grid[x, y + 1] != gridSpace.floor)
                     {
@@ -418,24 +381,6 @@ public class LevelGenerator : MonoBehaviour
                     {
                         grid[x, y] = gridSpace.lu;
                     }
-                    //// Т - образные стены n - не ,буква там, где стены
-                    //if ((grid[x, y + 1] == gridSpace.floor || grid[x, y + 1] == gridSpace.empty) && grid[x - 1, y] != gridSpace.floor && grid[x - 1, y] != gridSpace.empty && grid[x, y - 1] != gridSpace.floor && grid[x, y - 1] != gridSpace.empty && grid[x + 1, y] != gridSpace.floor && grid[x + 1, y] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.nldr;
-                    //}
-                    //if ((grid[x, y - 1] == gridSpace.floor || grid[x, y - 1] == gridSpace.empty) && grid[x - 1, y] != gridSpace.floor && grid[x - 1, y] != gridSpace.empty && grid[x, y + 1] != gridSpace.floor && grid[x, y + 1] != gridSpace.empty && grid[x + 1, y] != gridSpace.floor && grid[x + 1, y] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.nlur;
-                    //}
-                    //if ((grid[x + 1, y] == gridSpace.floor || grid[x + 1, y] == gridSpace.empty) && grid[x - 1, y] != gridSpace.floor && grid[x - 1, y] != gridSpace.empty && grid[x, y - 1] != gridSpace.floor && grid[x, y - 1] != gridSpace.empty && grid[x, y + 1] != gridSpace.floor && grid[x, y + 1] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.nuld;
-                    //}
-                    //if ((grid[x - 1, y] == gridSpace.floor || grid[x - 1, y] == gridSpace.empty) && grid[x + 1, y] != gridSpace.floor && grid[x + 1, y] != gridSpace.empty && grid[x, y - 1] != gridSpace.floor && grid[x, y - 1] != gridSpace.empty && grid[x, y + 1] != gridSpace.floor && grid[x, y + 1] != gridSpace.empty)
-                    //{
-                    //    grid[x, y] = gridSpace.nurd;
-                    //}
-
                 }
             }
         }
@@ -537,7 +482,6 @@ public class LevelGenerator : MonoBehaviour
             {
                 switch (grid[x, y])
                 {
-                    //floor, wall, l, u, r, d, luc, ldc, ruc, rdc, lr, ud, ldr, lur, uld, urd, rd, ru, ld, lu, nldr, nlur, nuad, nurd, nlurd;
                     case gridSpace.empty:
                         break;
                     case gridSpace.floor:
@@ -623,9 +567,8 @@ public class LevelGenerator : MonoBehaviour
     }
     Vector2 RandomDirection()
     {
-        //pick random int between 0 and 3
         int choice = Mathf.FloorToInt(Random.value * 3.99f);
-        //use that int to chose a direction
+        //выбрать направление
         switch (choice)
         {
             case 0:

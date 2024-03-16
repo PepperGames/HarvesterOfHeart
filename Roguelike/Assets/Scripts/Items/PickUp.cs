@@ -38,11 +38,6 @@ public class PickUp : MonoBehaviour
                             //добавляем
                             inventory.isFull[i] = true;
                             Instantiate(itemButton, inventory.slots[i].transform, false);
-                            //if (inventory.selectedSlot == i)
-                            //inventory.GetTextInfo(i);
-                            //inventory.slots[i].transform.GetChild(0).GetComponent<SpawnItem>().SetSlotNumber(i);
-                            //print(inventory.slots[i].transform.GetChild(0).GetComponent<SpawnItem>());
-                            //print(inventory.slots[i].transform.GetChild(0).GetComponent<SpawnItem>().slotNumber);
                             Destroy(gameObject);
                             break;
                         }
@@ -57,25 +52,12 @@ public class PickUp : MonoBehaviour
                         if (inventory.selectedSlot == 7)
                             //inventory.GetTextInfo(7);
 
-                            print("создаю в 7 слоте только что поднятій амулет");
+                            print("создаю в 7 слоте только что поднятый амулет");
                             inventory.slots[7].GetComponent<Slot>().PutOnItem(7);
                         foreach (Transform child in inventory.slots[7].transform)
                         {
                             child.GetComponent<Amulet>().ApplyBuff();
 
-                            //if (child.CompareTag("BAmulet"))
-                            //{
-                            //    AmuletBuff.SetBuff(0, 0.1f, 1);
-                            //}
-                            //if (child.CompareTag("GAmulet"))
-                            //{
-                            //    AmuletBuff.SetBuff(0.1f, 0, 1);
-                            //}
-                            //if (child.CompareTag("YAmulet"))
-                            //{
-                            //    AmuletBuff.SetBuff(0, 0, 0.91f);
-                            //}
-                            //inventory.slots[7].transform.GetChild(0).GetComponent<SpawnItem>().slotNumber = 7;
                             print(child);
                             Destroy(gameObject);
                         }
@@ -89,9 +71,6 @@ public class PickUp : MonoBehaviour
                                 //добавляем
                                 inventory.isFull[i] = true;
                                 Instantiate(itemButton, inventory.slots[i].transform, false);
-                                //if (inventory.selectedSlot == i)
-                                //inventory.GetTextInfo(i);
-                                //inventory.slots[i].transform.GetChild(0).GetComponent<SpawnItem>().slotNumber = i;
                                 Destroy(gameObject);
                                 break;
                             }
@@ -102,7 +81,6 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    //прикольно но странно
     IEnumerator Drop()
     {
         var position = transform.position;
@@ -112,7 +90,6 @@ public class PickUp : MonoBehaviour
             {
                 position.x = transform.position.x + 0.01f;
                 position.y = transform.position.y - (-Mathf.Pow((n - 3), 2) + 9) / 500;
-                //print($"{n}, {(-Mathf.Pow((n - 3), 2) + 9)}");
                 transform.position = position;
             }
             else

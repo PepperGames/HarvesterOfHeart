@@ -54,7 +54,7 @@ public class Boss1Enemy : Person
             isMooving = true;
         }
         damage = 3 * LevelGenerator.LVL;
-        playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        playerHP = Player.GetComponent<Player>();
         maxHP = currentHP = 40 *( LevelGenerator.LVL + LevelGenerator.LVL/3);
         speed = Random.Range(1f, 3f);
         DisplayHP();
@@ -128,7 +128,6 @@ public class Boss1Enemy : Person
         }
         else
         {
-            Player = GameObject.FindGameObjectWithTag("Player");
             PathToPlayer = PathFinder.GetPath(Player.transform.position);
             isMooving = true;
         }
@@ -136,7 +135,6 @@ public class Boss1Enemy : Person
     }
     void Shoot()
     {
-        //Transform attackPos = GameObject.FindGameObjectWithTag("Player").transform;
         Instantiate(womenBeam,new Vector3( Random.Range(4,12), 7.31f, -95), Quaternion.identity);
     }
 
@@ -239,7 +237,7 @@ public class Boss1Enemy : Person
     }
     float DropAmuletChance(float k, float dropCount, float countDeadMobs)
     {
-        return ((k - dropCount) / (100 - countDeadMobs)) * 1.4f * (k - dropCount);
+        return ((k - dropCount) / (100 - countDeadMobs)) * 1.4f * (k - dropCount) * (k - dropCount);
     }
 
     public void RIP()

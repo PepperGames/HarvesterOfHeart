@@ -8,7 +8,6 @@ public class UseScroll : MonoBehaviour
     {
         int selectedSlot = gameObject.GetComponentInParent<Slot>().number;
         gameObject.GetComponent<Scroll>().ApplyBuff();
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().UseScroll(selectedSlot);
     }
     public void Drop()
     {

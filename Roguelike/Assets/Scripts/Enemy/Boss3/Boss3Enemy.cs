@@ -20,8 +20,6 @@ public class Boss3Enemy : Person
     //урон
     private float damage;
     public LayerMask whatIsEnemies;
-    //хп гг
-    //private bool isImpulse = false;
     //простая атака
     public float startTimeBtwAttac;
     public float timeBtwAttac = 0;
@@ -268,7 +266,7 @@ public class Boss3Enemy : Person
     }
     float DropAmuletChance(float k, float dropCount, float countDeadMobs)
     {
-        return ((k - dropCount) / (100 - countDeadMobs)) * 1.4f * (k - dropCount);
+        return ((k - dropCount) / (100 - countDeadMobs)) * 1.4f * (k - dropCount) * (k - dropCount);
     }
 
     public void RIP()

@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().attackable)
+            if (other.GetComponent<Player>().attackable)
             {
                 player.TakingDamage(damage);
                 Destroy(gameObject);
